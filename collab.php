@@ -296,6 +296,7 @@ try {
     <nav class="w-full bg-[#1a1a2e] p-4 shadow-md flex justify-between items-center fixed top-0 left-0 right-0 z-50">
         <h1 class="text-xl font-bold flex items-center">
             <i class="fas fa-code mr-2 text-yellow-400"></i>
+            CODEBOOK-
             <?php echo SITE_NAME; ?>
         </h1>
         <ul class="hidden md:flex space-x-4 text-sm">
