@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevAwakening</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #f59e0b;
+            --primary-dark: #d97706;
+            --dark-blue: #1a1a2e;
+        }
+    
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: white;
+            background: linear-gradient(-45deg, #16213e, #1a1a2e, #0f3460, #16213e);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            overflow-x: hidden;
+        }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .dark-box {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .course-card {
+            background: linear-gradient(145deg, rgba(255,255,255,0.95), rgba(245,245,245,0.98));
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+            height: 450px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            margin: 0 15px;
+            transform-style: preserve-3d;
+        }
+        
+        .course-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, var(--primary), #fbbf24);
+        }
+        
+        .course-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+        }
+        
+        .course-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            transition: all 0.5s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .course-card:hover .course-img {
+            transform: scale(1.05) rotate(1deg);
+        }
+        
+        .course-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+            text-shadow: 0 2px 5px rgba(245, 158, 11, 0.3);
+        }
+        
+        .course-card:hover .course-icon {
+            transform: scale(1.2);
+            color: var(--primary-dark);
+        }
+        
+        .course-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .course-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--primary);
+            transition: all 0.3s ease;
+        }
+        
+        .course-card:hover .course-title::after {
+            width: 100%;
+        }
+        
+        .course-desc {
+            color: #4a5568;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .course-btn {
+            background: linear-gradient(45deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: auto;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .course-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: all 0.5s ease;
+        }
+        
+        .course-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.6);
+        }
+        
+        .course-btn:hover::before {
+            left: 100%;
+        }
+        
+        .carousel {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            padding: 40px 0;
+        }
+        
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); /* Faster transition */
+            will-change: transform;
+        }
+        
+        .carousel-item {
+            flex: 0 0 33.333%;
+            padding: 0 15px;
+            box-sizing: border-box;
+        }
+        
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            z-index: 10;
+            pointer-events: none;
+        }
+        
+        .carousel-nav button {
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            pointer-events: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .carousel-nav button:hover {
+            background: rgba(245, 158, 11, 0.9);
+            transform: scale(1.1);
+        }
+        
+        .dot-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            gap: 12px;
+        }
+        
+        .dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .dot::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .dot:hover {
+            background: rgba(255, 255, 255, 0.6);
+        }
+        
+        .active-dot {
+            background: var(--primary);
+            transform: scale(1.2);
+        }
+        
+        .active-dot::after {
+            border-color: rgba(245, 158, 11, 0.5);
+        }
+        
+        .glow-text {
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+        }
+        
+        .hero-btn {
+            background: linear-gradient(45deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(245, 158, 11, 0.4);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .hero-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--primary-dark), var(--primary));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+        
+        .hero-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(245, 158, 11, 0.6);
+        }
+        
+        .hero-btn:hover::before {
+            opacity: 1;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 1200px) {
+            .carousel-item {
+                flex: 0 0 50%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .carousel-item {
+                flex: 0 0 100%;
+            }
+            
+            .course-card {
+                height: 420px;
+            }
+            
+            .carousel-nav button {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+        }
+        
+        /* Floating animation for hero section */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        /* Pulse animation for CTA */
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(245, 158, 11, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        .contact-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 10px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .contact-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        .social-icon {
+            font-size: 24px;
+            margin: 0 10px;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .social-icon:hover {
+            color: #fbbf24;
+            transform: scale(1.2);
+      }
+
+    </style>
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen">
+    <!-- Navigation Bar -->
+    <nav class="w-full bg-[#1a1a2e] p-4 shadow-md flex justify-between items-center fixed top-0 left-0 right-0 z-50 text-white">
+        <h1 class="text-xl font-bold">CODEBOOK</h1>
+        <ul class="flex space-x-6 text-lg">
+            <li><a href="#home" class="hover:text-yellow-400">Home</a></li>
+            <li><a href="courses.html" class="hover:text-yellow-400">Courses</a></li>
+            <li><a href="#about" class="hover:text-yellow-400">About</a></li>
+            <li><a href="#contact" class="hover:text-yellow-400">Contact</a></li>
+            <li><a href="collab.php" class="hover:text-yellow-400">Collaborate</a></li>
+            <li><a href="logout.php" class="hover:text-yellow-400">Logout</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="text-center mt-32 fade-in dark-box">
+        <h2 class="text-5xl font-extrabold glow-text">Awaken Your Coding Potential</h2>
+        <p class="text-lg mt-4">Learn, collaborate, and grow together.</p>
+        <button class="mt-6 px-6 py-3 bg-yellow-500 text-white text-lg font-bold rounded-full hover:bg-yellow-600 transition">Get Started</button>
+    </section>
+
+    <!-- Course Details -->
+    <section id="courses" class="mt-16 p-6 w-full max-w-6xl dark-box fade-in">
+        <div class="text-center mb-12">
+            <h3 class="text-3xl md:text-4xl font-bold mb-4">Explore Our <span class="text-yellow-400">Courses</span></h3>
+            <p class="text-lg text-gray-300 max-w-2xl mx-auto">Hands-on learning with real-world projects and expert mentorship</p>
+        </div>
+        
+        <div class="carousel">
+            <div class="carousel-nav">
+                <button id="prevBtn" class="ml-4">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button id="nextBtn" class="mr-4">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            
+            <div class="carousel-inner">
+                <!-- Java Course -->
+            <div class="carousel-item">
+                <div class="course-card">
+                    <img src="https://images.unsplash.com/photo-1580894732444-8ecded7900cd?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Java Programming" class="course-img">
+                    <div class="flex flex-col h-full">
+                        <h4 class="course-title text-2xl font-bold mb-2">Java Mastery</h4>
+                        <p class="course-desc mb-4">From basics to advanced concepts including Spring Boot, Hibernate, and microservices architecture.</p>
+                        <button class="course-btn mt-auto bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-6 rounded-full transition duration-300">
+                            START COURSE
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- C++ Course -->
+            <div class="carousel-item">
+                <div class="course-card">
+                    <img src="https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="C++ Programming" class="course-img">
+                    <div class="flex flex-col h-full">
+                        <h4 class="course-title text-2xl font-bold mb-2">C++ Excellence</h4>
+                        <p class="course-desc mb-4">Master core concepts, memory management, STL, and modern C++ features (C++11/14/17).</p>
+                        <button class="course-btn mt-auto bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-6 rounded-full transition duration-300">
+                            START COURSE
+                        </button>
+                    </div>
+                </div>
+            </div>
+                
+                
+                <!-- Python Course -->
+                <div class="carousel-item">
+                    <div class="course-card">
+                        <img src="https://images.unsplash.com/photo-1526379095098-d400fd0bf935?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Python Programming" class="course-img">
+                        <div class="flex flex-col h-full">
+                            <i class="fab fa-python course-icon"></i>
+                            <h4 class="course-title">Python Power</h4>
+                            <p class="course-desc">From fundamentals to Django/Flask web development, data science, and automation.</p>
+                            <button class="course-btn" onclick="location.href='courses.html#python'">
+                                <i class="fas fa-arrow-right mr-2"></i> Start Course
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Web Dev Course -->
+                <div class="carousel-item">
+                    <div class="course-card">
+                        <img src="https://images.unsplash.com/photo-1621839673705-6617adf9e890?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Web Development" class="course-img">
+                        <div class="flex flex-col h-full">
+                            <i class="fas fa-laptop-code course-icon"></i>
+                            <h4 class="course-title">Fullstack Web</h4>
+                            <p class="course-desc">Master HTML, CSS, JavaScript, React, Node.js and build complete web applications.</p>
+                            <button class="course-btn" onclick="location.href='courses.html#web-dev'">
+                                <i class="fas fa-arrow-right mr-2"></i> Start Course
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- PHP Course -->
+                <div class="carousel-item">
+                    <div class="course-card">
+                        <img src="https://images.unsplash.com/photo-1607252650355-f7fd0460ccdb?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="PHP Development" class="course-img">
+                        <div class="flex flex-col h-full">
+                            <h4 class="course-title text-2xl font-bold mb-2">PHP Professional</h4>
+                            <p class="course-desc mb-4">Build dynamic websites with PHP, MySQL, Laravel and modern backend techniques.</p>
+                            <button class="course-btn mt-auto bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-6 rounded-full transition duration-300">
+                                START COURSE
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- <div class="dot-container">
+            <div class="dot active-dot" onclick="goToSlide(0)"></div>
+            <div class="dot" onclick="goToSlide(1)"></div>
+            <div class="dot" onclick="goToSlide(2)"></div>
+            <div class="dot" onclick="goToSlide(3)"></div>
+            <div class="dot" onclick="goToSlide(4)"></div>
+            <div class="dot" onclick="goToSlide(5)"></div>
+        </div> -->
+        
+        <div class="text-center mt-12">
+            <button onclick="location.href='courses.html'" class="px-8 py-3 bg-transparent border-2 border-yellow-400 text-yellow-400 rounded-full font-semibold hover:bg-yellow-400 hover:text-white transition duration-300">
+                View All Courses <i class="fas fa-arrow-right ml-2"></i>
+            </button>
+        </div>
+    </section>
+
+   <!-- About Section -->
+   <section id="about" class="mt-16 p-6 w-3/4 dark-box fade-in">
+    <h3 class="text-3xl font-bold text-center mb-8">About DevAwakening</h3>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="feature-card">
+            <div class="text-center">
+                <i class="fas fa-bullseye text-4xl text-yellow-500 mb-4"></i>
+                <h4 class="text-xl font-semibold mb-3">Our Mission</h4>
+                <p class="text-gray-300">To democratize coding education and empower developers worldwide with practical, project-based learning experiences.</p>
+            </div>
+        </div>
+        <div class="feature-card">
+            <div class="text-center">
+                <i class="fas fa-history text-4xl text-yellow-500 mb-4"></i>
+                <h4 class="text-xl font-semibold mb-3">Our Story</h4>
+                <p class="text-gray-300">Founded in 2025 by a team of passionate developers who believed learning to code should be accessible, engaging, and community-driven.</p>
+            </div>
+        </div>
+        <div class="feature-card">
+            <div class="text-center">
+                <i class="fas fa-users text-4xl text-yellow-500 mb-4"></i>
+                <h4 class="text-xl font-semibold mb-3">Our Community</h4>
+                <p class="text-gray-300">Join 50,000+ developers in our active Discord community where we collaborate, solve problems, and grow together.</p>
+                <a href="#" class="text-yellow-400 hover:underline mt-2 inline-block">Join Now <i class="fas fa-arrow-right ml-1"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="mt-10 text-center">
+        <h4 class="text-2xl font-semibold mb-4">Why Choose Us?</h4>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="text-left p-4">
+                <div class="flex items-start mb-3">
+                    <i class="fas fa-check-circle text-yellow-500 text-xl mt-1 mr-3"></i>
+                    <div>
+                        <h5 class="font-semibold">Project-Based Learning</h5>
+                        <p class="text-gray-300">Learn by building real-world projects that enhance your portfolio.</p>
+                    </div>
+                </div>
+                <div class="flex items-start mb-3">
+                    <i class="fas fa-check-circle text-yellow-500 text-xl mt-1 mr-3"></i>
+                    <div>
+                        <h5 class="font-semibold">Expert Instructors</h5>
+                        <p class="text-gray-300">Learn from industry professionals with years of experience.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="text-left p-4">
+                <div class="flex items-start mb-3">
+                    <i class="fas fa-check-circle text-yellow-500 text-xl mt-1 mr-3"></i>
+                    <div>
+                        <h5 class="font-semibold">Flexible Learning</h5>
+                        <p class="text-gray-300">Study at your own pace with our on-demand courses.</p>
+                    </div>
+                </div>
+                <div class="flex items-start mb-3">
+                    <i class="fas fa-check-circle text-yellow-500 text-xl mt-1 mr-3"></i>
+                    <div>
+                        <h5 class="font-semibold">Career Support</h5>
+                        <p class="text-gray-300">Get help with resumes, interviews, and job placement.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="mt-16 p-6 w-3/4 dark-box fade-in">
+    <h3 class="text-3xl font-bold text-center mb-8">Get In Touch</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div>
+            <h4 class="text-2xl font-semibold mb-6 text-yellow-400">Contact Information</h4>
+            <div class="contact-card">
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-envelope text-yellow-500 text-2xl mr-4"></i>
+                    <div>
+                        <h5 class="font-semibold">Email Us</h5>
+                        <a href="mailto:info@devawakening.com" class="text-gray-300 hover:text-yellow-400">info@devawakening.com</a>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-card mt-4">
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-phone-alt text-yellow-500 text-2xl mr-4"></i>
+                    <div>
+                        <h5 class="font-semibold">Call Us</h5>
+                        <a href="tel:+11234567890" class="text-gray-300 hover:text-yellow-400">+1 (123) 456-7890</a>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-card mt-4">
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-map-marker-alt text-yellow-500 text-2xl mr-4"></i>
+                    <div>
+                        <h5 class="font-semibold">Visit Us</h5>
+                        <p class="text-gray-300">123 Developer Lane, Tech City, TC 10101</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-6">
+                <h5 class="font-semibold mb-3">Follow Us</h5>
+                <div class="flex justify-start">
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-discord"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h4 class="text-2xl font-semibold mb-6 text-yellow-400">Send Us a Message</h4>
+            <form class="space-y-4">
+                <div>
+                    <label for="name" class="block mb-1">Your Name</label>
+                    <input type="text" id="name" class="w-full bg-gray-700 bg-opacity-50 border border-gray-600 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500">
+                </div>
+                <div>
+                    <label for="email" class="block mb-1">Email Address</label>
+                    <input type="email" id="email" class="w-full bg-gray-700 bg-opacity-50 border border-gray-600 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500">
+                </div>
+                <div>
+                    <label for="subject" class="block mb-1">Subject</label>
+                    <input type="text" id="subject" class="w-full bg-gray-700 bg-opacity-50 border border-gray-600 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500">
+                </div>
+                <div>
+                    <label for="message" class="block mb-1">Message</label>
+                    <textarea id="message" rows="4" class="w-full bg-gray-700 bg-opacity-50 border border-gray-600 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500"></textarea>
+                </div>
+                <button type="submit" class="px-6 py-3 bg-yellow-500 text-white font-bold rounded-lg hover:bg-yellow-600 transition w-full">Send Message</button>
+            </form>
+        </div>
+    </div>
+    <div class="mt-10 text-center">
+        <h4 class="text-xl font-semibold mb-4">Have Questions?</h4>
+        <p class="text-gray-300 mb-4">Check out our <a href="#" class="text-yellow-400 hover:underline">FAQs</a> or join our <a href="#" class="text-yellow-400 hover:underline">community forum</a> for quick answers.</p>
+        <p class="text-gray-300">For business inquiries: <a href="mailto:partnerships@devawakening.com" class="text-yellow-400 hover:underline">partnerships@devawakening.com</a></p>
+    </div>
+</section>
+
+    <script>
+        const carouselInner = document.querySelector('.carousel-inner');
+        const items = document.querySelectorAll('.carousel-item');
+        const totalItems = items.length;
+    
+        const nextBtn = document.getElementById('nextBtn');
+        const prevBtn = document.getElementById('prevBtn');
+    
+        const dotsContainer = document.querySelector('.carousel-dots');
+        let dots = [];
+    
+        let currentIndex = 0;
+        let moveCount = 0;
+        const maxMoves = 3;
+        let isTransitioning = false;
+    
+        const slideIntervalTime = 1500;
+        let slideInterval = setInterval(nextSlide, slideIntervalTime);
+    
+        function setupDots() {
+            dotsContainer.innerHTML = ''; // Clear old dots
+            for (let i = 0; i < maxMoves; i++) {
+                const dot = document.createElement('span');
+                dot.classList.add('dot');
+                if (i === 0) dot.classList.add('active-dot');
+                dotsContainer.appendChild(dot);
+            }
+            dots = document.querySelectorAll('.dot');
+        }
+    
+        function updateCarousel() {
+            const itemWidth = items[0].offsetWidth + 30;
+            carouselInner.style.transition = 'transform 0.6s ease-in-out';
+            carouselInner.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
+            updateDots();
+        }
+    
+        function updateDots() {
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active-dot', index === currentIndex);
+            });
+        }
+    
+        function nextSlide() {
+            if (isTransitioning) return;
+            isTransitioning = true;
+    
+            if (moveCount < maxMoves - 1) {
+                currentIndex++;
+                moveCount++;
+                updateCarousel();
+            } else {
+                // Smooth reset
+                currentIndex = 0;
+                moveCount = 0;
+                carouselInner.style.transition = 'transform 0.6s ease-in-out';
+                const itemWidth = items[0].offsetWidth + 30;
+                carouselInner.style.transform = `translateX(0px)`;
+                updateDots();
+            }
+    
+            setTimeout(() => {
+                isTransitioning = false;
+            }, 600);
+        }
+    
+        function prevSlide() {
+            if (isTransitioning) return;
+            isTransitioning = true;
+    
+            if (currentIndex > 0) {
+                currentIndex--;
+                moveCount = Math.max(0, moveCount - 1);
+            } else {
+                currentIndex = maxMoves - 1;
+                moveCount = maxMoves - 1;
+            }
+            updateCarousel();
+    
+            setTimeout(() => {
+                isTransitioning = false;
+            }, 600);
+        }
+    
+        function resetInterval() {
+            clearInterval(slideInterval);
+            slideInterval = setInterval(nextSlide, slideIntervalTime);
+        }
+    
+        nextBtn.addEventListener('click', () => {
+            nextSlide();
+            resetInterval();
+        });
+    
+        prevBtn.addEventListener('click', () => {
+            prevSlide();
+            resetInterval();
+        });
+    
+        carouselInner.addEventListener('mouseenter', () => clearInterval(slideInterval));
+        carouselInner.addEventListener('mouseleave', resetInterval);
+    
+        // Touch support
+        let startX = 0, endX = 0;
+        carouselInner.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+        }, { passive: true });
+    
+        carouselInner.addEventListener('touchend', (e) => {
+            endX = e.changedTouches[0].clientX;
+            if (endX < startX - 50) nextSlide();
+            if (endX > startX + 50) prevSlide();
+            resetInterval();
+        }, { passive: true });
+    
+        window.addEventListener('resize', updateCarousel);
+        window.addEventListener('load', () => {
+            setupDots();
+            updateCarousel();
+        });
+    </script>
+</body>
+</html>
+        

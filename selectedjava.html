@@ -1,0 +1,747 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Course</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        html { scroll-behavior: smooth; }
+        body { font-family: Arial, sans-serif; background: #0f3460; color: white; }
+        .sidebar {
+            width: 280px;
+            height: 100vh;
+            position: fixed;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-right: 1px solid rgba(255, 255, 255, 0.2);
+            overflow-y: auto; /* Fix applied here */
+        }
+        .sidebar a { display: block; padding: 10px; margin: 5px 0; color: white; text-decoration: none; border-radius: 5px; transition: all 0.3s ease; cursor: pointer; }
+        .sidebar a:hover, .sidebar a.active { background: rgba(255, 255, 255, 0.2); font-weight: bold; }
+        .content { margin-left: 300px; padding: 20px; }
+        .code-block { background: #1e1e1e; padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; border-left: 5px solid #ffcc00; }
+        .content-section { display: none; }
+        .content-section.active { display: block; }
+    </style>
+    <script>
+        function showContent(sectionId, element) {
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+
+            document.querySelectorAll('.sidebar a').forEach(link => {
+                link.classList.remove('active');
+            });
+            element.classList.add('active');
+        }
+    </script>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <h2 class="text-xl font-bold mb-4"><i class="fas fa-code"></i> Java Course</h2>
+        <a onclick="showContent('introduction', this)" class="active">Introduction</a>
+        <a onclick="showContent('installation', this)">Installation & Setup</a>
+        <a onclick="showContent('syntax', this)">Java Syntax</a>
+        <a onclick="showContent('variables', this)">Variables & Data Types</a>
+        <a onclick="showContent('operators', this)">Operators</a>
+        <a onclick="showContent('control-statements', this)">Control Statements</a>
+        <a onclick="showContent('arrays', this)">Arrays</a>
+        <a onclick="showContent('strings', this)">Strings</a>
+        <a onclick="showContent('methods', this)">Methods</a>
+        <a onclick="showContent('oop', this)">OOP Basics</a>
+        <a onclick="showContent('classes', this)">Classes & Objects</a>
+        <a onclick="showContent('inheritance', this)">Inheritance</a>
+        <a onclick="showContent('polymorphism', this)">Polymorphism</a>
+        <a onclick="showContent('abstraction', this)">Abstraction & Interfaces</a>
+        <a onclick="showContent('exceptions', this)">Exception Handling</a>
+        <a onclick="showContent('file-handling', this)">File Handling</a>
+        <a onclick="showContent('multithreading', this)">Multithreading</a>
+        <a onclick="showContent('collections', this)">Collections Framework</a>
+        <a onclick="showContent('streams', this)">Streams & Lambda</a>
+        <a onclick="showContent('jdbc', this)">JDBC</a>
+    </div>
+    
+    <!-- Content Section -->
+    <div class="content">
+        <div id="introduction" class="content-section active">
+            <h1 class="text-4xl font-bold text-yellow-400 underline">Welcome to Java Course</h1>
+            <p class="mt-4 text-gray-300">
+                This course covers all the essential concepts of Java, from basic syntax to advanced topics like OOP, Multithreading, and JDBC.
+            </p>
+        
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">What is Java?</h2>
+            <p class="text-gray-300 mt-2">
+                Java is a <span class="text-yellow-300 font-semibold">class-based, object-oriented programming language</span> designed to have minimal implementation dependencies. 
+                It allows developers to <span class="text-yellow-300 font-semibold">"Write Once, Run Anywhere" (WORA)</span>, meaning Java code can run on any platform that supports Java without recompilation.
+            </p>
+        
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">History of Java</h2>
+            <p class="text-gray-300 mt-2">
+                Java was developed by <span class="text-yellow-300 font-semibold">James Gosling</span> at Sun Microsystems in <span class="text-yellow-300 font-semibold">May 1995</span>. 
+                Later, Oracle Corporation acquired Java, making it one of the most widely used languages for <span class="text-yellow-300 font-semibold">desktop, web, and mobile applications</span>.
+            </p>
+            <ul class="list-disc pl-6 mt-2 text-gray-300">
+                <li>Originally named <span class="text-yellow-300 font-semibold">Oak</span>, later renamed Java after Java coffee.</li>
+                <li>First publicly released in <span class="text-yellow-300 font-semibold">1996 as Java 1.0</span>.</li>
+                <li>In <span class="text-yellow-300 font-semibold">2006</span>, Sun Microsystems released a large portion of the Java Virtual Machine (JVM) as <span class="text-yellow-300 font-semibold">open-source software</span>.</li>
+                <li>By <span class="text-yellow-300 font-semibold">2007</span>, the core JVM code became fully available under open-source distribution.</li>
+            </ul>
+        
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Key Features of Java</h2>
+            <ul class="list-disc pl-6 mt-2 text-gray-300">
+                <li><span class="text-yellow-300 font-semibold">Platform Independent:</span> Java bytecode runs on any OS with a JVM.</li>
+                <li><span class="text-yellow-300 font-semibold">Object-Oriented:</span> Java follows the OOP principles of Abstraction, Encapsulation, Inheritance, and Polymorphism.</li>
+                <li><span class="text-yellow-300 font-semibold">Simplicity:</span> Java eliminates complex features like pointers and multiple inheritance.</li>
+                <li><span class="text-yellow-300 font-semibold">Robustness:</span> Java has strong memory management, garbage collection, and exception handling.</li>
+                <li><span class="text-yellow-300 font-semibold">Security:</span> Java runs in a secure environment, preventing unauthorized access and vulnerabilities.</li>
+                <li><span class="text-yellow-300 font-semibold">Multithreading:</span> Java supports concurrent execution of multiple tasks for high-performance applications.</li>
+                <li><span class="text-yellow-300 font-semibold">Portability:</span> Java code can be executed on any machine, thanks to its architecture-neutral bytecode.</li>
+                <li><span class="text-yellow-300 font-semibold">High Performance:</span> Uses Just-In-Time (JIT) compiler to optimize code execution.</li>
+            </ul>
+        
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">How Java Code Executes?</h2>
+            <ol class="list-decimal pl-6 mt-2 text-gray-300">
+                <li><span class="text-yellow-300 font-semibold">Writing the Program:</span> Developers write Java code in a text editor or IDE.</li>
+                <li><span class="text-yellow-300 font-semibold">Compiling the Code:</span> The Java compiler (javac) converts source code into bytecode.</li>
+                <li><span class="text-yellow-300 font-semibold">Running the Program:</span> The Java Virtual Machine (JVM) interprets and executes the bytecode.</li>
+            </ol>
+        
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
+            <p class="text-gray-300 mt-2">
+                Java is a powerful and versatile programming language used for a wide range of applications. Its platform independence, strong security, and OOP principles make it one of the most popular programming languages in the world.
+            </p>
+        </div>
+        <div id="installation" class="content-section active">
+            <h1 class="text-4xl font-bold text-yellow-400 underline">Java Installation & Setup</h1>
+            <p class="mt-4 text-gray-300">Follow these steps to install Java on different operating systems and set up environment variables.</p>
+        
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Setting Up Environment Variables</h2>
+            <p class="text-gray-300 mt-2">
+                Setting up environment variables helps the system locate Java tools needed to run Java programs. Ensure that the <span class="text-yellow-300 font-semibold">Java Development Kit (JDK)</span> is installed and its directory is known.
+            </p>
+            <ul class="list-disc pl-6 mt-2 text-gray-300">
+                <li><span class="text-yellow-300 font-semibold">JAVA_HOME:</span> Points to the JDK installation directory.</li>
+                <li><span class="text-yellow-300 font-semibold">PATH:</span> Specifies where the OS should look for executable files.</li>
+            </ul>
+        
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Setting Environment Variables in Windows</h2>
+            <ol class="list-decimal pl-6 mt-2 text-gray-300">
+                <li>Download and install the latest JDK from the <span class="text-yellow-300 font-semibold">Oracle website</span>.</li>
+                <li>Press <span class="text-yellow-300 font-semibold">Windows + S</span>, search for “Environment Variables,” and select <span class="text-yellow-300 font-semibold">Edit the system environment variables</span>.</li>
+                <li>In the System Properties window, click <span class="text-yellow-300 font-semibold">Environment Variables</span>.</li>
+                <li>Under System Variables, click <span class="text-yellow-300 font-semibold">New</span> and set:
+                    <ul class="list-disc pl-6 mt-2">
+                        <li><span class="text-yellow-300 font-semibold">Variable name:</span> JAVA_HOME</li>
+                        <li><span class="text-yellow-300 font-semibold">Variable value:</span> Path to the JDK installation folder (e.g., C:\Program Files\Java\jdk-23)</li>
+                    </ul>
+                </li>
+                <li>Update the PATH variable:
+                    <ul class="list-disc pl-6 mt-2">
+                        <li>Locate the <span class="text-yellow-300 font-semibold">bin</span> folder inside JDK (e.g., C:\Program Files\Java\jdk-23\bin).</li>
+                        <li>Under System Variables, select <span class="text-yellow-300 font-semibold">Path</span> → Edit → New.</li>
+                        <li>Add the copied path and click OK.</li>
+                    </ul>
+                </li>
+                <li>Verify installation using Command Prompt:
+                    <ul class="list-disc pl-6 mt-2">
+                        <li><span class="text-yellow-300 font-semibold">java --version</span></li>
+                        <li><span class="text-yellow-300 font-semibold">javac --version</span></li>
+                    </ul>
+                </li>
+            </ol>
+        
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Setting Environment Variables in Linux</h2>
+            <ol class="list-decimal pl-6 mt-2 text-gray-300">
+                <li>After installing JDK, open the terminal and run:
+                    <pre class="bg-gray-800 p-2 rounded">export JAVA_HOME=/path/to/your/jdk</pre>
+                </li>
+                <li>Update the PATH variable:
+                    <pre class="bg-gray-800 p-2 rounded">export PATH=$PATH:$JAVA_HOME/bin</pre>
+                </li>
+                <li>Make the changes permanent by adding these lines to your shell configuration file:
+                    <ul class="list-disc pl-6 mt-2">
+                        <li>Bash: <pre class="bg-gray-800 p-2 rounded">nano ~/.bashrc</pre></li>
+                        <li>Zsh: <pre class="bg-gray-800 p-2 rounded">nano ~/.zshrc</pre></li>
+                        <li>Fish: <pre class="bg-gray-800 p-2 rounded">nano ~/.config/fish/config.fish</pre></li>
+                    </ul>
+                    Add the export commands and save the file. Then apply changes:
+                    <pre class="bg-gray-800 p-2 rounded">source ~/.bashrc</pre>
+                </li>
+                <li>Verify installation:
+                    <pre class="bg-gray-800 p-2 rounded">echo $JAVA_HOME</pre>
+                    <pre class="bg-gray-800 p-2 rounded">echo $PATH</pre>
+                    <pre class="bg-gray-800 p-2 rounded">java --version</pre>
+                    <pre class="bg-gray-800 p-2 rounded">javac --version</pre>
+                </li>
+            </ol>
+        
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Setting Environment Variables in macOS</h2>
+            <ol class="list-decimal pl-6 mt-2 text-gray-300">
+                <li>Open the terminal and edit the shell profile:
+                    <ul class="list-disc pl-6 mt-2">
+                        <li>Bash (Older macOS): <pre class="bg-gray-800 p-2 rounded">nano ~/.bash_profile</pre></li>
+                        <li>Zsh (Default for macOS Catalina and later): <pre class="bg-gray-800 p-2 rounded">nano ~/.zshrc</pre></li>
+                    </ul>
+                </li>
+                <li>Add the following lines at the end of the file:
+                    <pre class="bg-gray-800 p-2 rounded">export JAVA_HOME=$(/usr/libexec/java_home)
+        export PATH=$JAVA_HOME/bin:$PATH</pre>
+                </li>
+                <li>Apply the changes:
+                    <pre class="bg-gray-800 p-2 rounded">source ~/.zshrc</pre>
+                </li>
+                <li>Verify installation:
+                    <pre class="bg-gray-800 p-2 rounded">echo $JAVA_HOME</pre>
+                    <pre class="bg-gray-800 p-2 rounded">echo $PATH</pre>
+                    <pre class="bg-gray-800 p-2 rounded">java --version</pre>
+                    <pre class="bg-gray-800 p-2 rounded">javac --version</pre>
+                </li>
+            </ol>
+        
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
+            <p class="text-gray-300 mt-2">
+                After following these steps, your Java environment variables will be correctly set, allowing smooth execution of Java programs across different operating systems.
+            </p>
+        </div>
+        <div id="syntax" class="content-section">
+            <h1 class="text-4xl font-bold text-yellow-400 underline">Java Syntax</h1>
+            <p class="mt-4 text-gray-300">Java is an object-oriented programming language known for its simplicity, portability, and robustness. Its syntax is closely aligned with C and C++, making it easier to understand.</p>
+            
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Structure of a Java Program</h2>
+            <p class="text-gray-300 mt-2">A basic Java program consists of several components that create a functional application. Below is a simple "Hello World" program:</p>
+            
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+                <span class="text-gray-300">// FileName : "Radha.java".</span>
+                <span class="text-red-400">public class Radha {</span>
+                    <span class="text-yellow-400">public static void main(String args[]) {</span>
+                        System.out.println("Hello World");
+                    }
+                }
+            </pre>
+            
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Key Components of a Java Program</h2>
+            <ul class="list-disc pl-6 mt-2 text-gray-300">
+                <li><span class="text-yellow-300 font-semibold">Class Declaration:</span> Every Java program starts with a class using the <code>class</code> keyword.</li>
+                <li><span class="text-yellow-300 font-semibold">Object:</span> An instance of a class that represents an entity with behavior and state.</li>
+                <li><span class="text-yellow-300 font-semibold">Main Method:</span> The entry point of the Java program.</li>
+                <li><span class="text-yellow-300 font-semibold">Statements:</span> Each line inside a method ends with a semicolon (<code>;</code>).</li>
+            </ul>
+            
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Java Syntax Key Elements</h2>
+            <ul class="list-disc pl-6 mt-2 text-gray-300">
+                <li><span class="text-yellow-300 font-semibold">Comments:</span> Java supports single-line, multi-line, and documentation comments.</li>
+                <li><span class="text-yellow-300 font-semibold">Source File Naming Rules:</span> Public class names must match the file name.</li>
+                <li><span class="text-yellow-300 font-semibold">Case Sensitivity:</span> Java is case-sensitive.</li>
+                <li><span class="text-yellow-300 font-semibold">Naming Conventions:</span> Class names start with uppercase, methods with lowercase.</li>
+            </ul>
+            
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Compiling and Running a Java Program</h2>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+                javac Radha.java
+                java Radha
+            </pre>
+            <p class="text-gray-300 mt-2">After following these rules, you will have a well-structured Java program with correct syntax.</p>
+        </div>
+
+        <div id="variables" class="content-section active">
+            <h1 class="text-4xl font-bold text-yellow-400 underline">Java Variables & Data Types</h1>
+            <p class="mt-4 text-gray-300">Variables in Java store data values and are associated with data types that determine the type of data they can hold.</p>
+        
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Declaring Variables</h2>
+            <p class="text-gray-300 mt-2">A variable in Java is declared using a specific data type followed by the variable name. For example:</p>
+        
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+                <span class="text-red-400">int</span> age = <span class="text-yellow-400">25</span>;
+                <span class="text-red-400">double</span> price = <span class="text-yellow-400">99.99</span>;
+                <span class="text-red-400">char</span> grade = 'A';
+                <span class="text-red-400">boolean</span> isJavaFun = <span class="text-yellow-400">true</span>;
+            </pre>
+        
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Types of Variables</h2>
+            <ul class="list-disc pl-6 mt-2 text-gray-300">
+                <li><span class="text-yellow-300 font-semibold">Local Variables:</span> Declared inside a method or block and accessible only within that scope.</li>
+                <li><span class="text-yellow-300 font-semibold">Instance Variables:</span> Belong to an object and are declared outside methods but inside a class.</li>
+                <li><span class="text-yellow-300 font-semibold">Static Variables:</span> Declared with the <code>static</code> keyword and shared among all objects of a class.</li>
+            </ul>
+        
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Primitive Data Types</h2>
+            <p class="text-gray-300 mt-2">Java has eight primitive data types:</p>
+            <ul class="list-disc pl-6 mt-2 text-gray-300">
+                <li><span class="text-yellow-300 font-semibold">byte:</span> 8-bit integer (-128 to 127)</li>
+                <li><span class="text-yellow-300 font-semibold">short:</span> 16-bit integer (-32,768 to 32,767)</li>
+                <li><span class="text-yellow-300 font-semibold">int:</span> 32-bit integer (-2^31 to 2^31-1)</li>
+                <li><span class="text-yellow-300 font-semibold">long:</span> 64-bit integer (-2^63 to 2^63-1)</li>
+                <li><span class="text-yellow-300 font-semibold">float:</span> 32-bit floating point</li>
+                <li><span class="text-yellow-300 font-semibold">double:</span> 64-bit floating point</li>
+                <li><span class="text-yellow-300 font-semibold">char:</span> 16-bit Unicode character</li>
+                <li><span class="text-yellow-300 font-semibold">boolean:</span> Represents true or false</li>
+            </ul>
+        
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Example Program</h2>
+            <p class="text-gray-300 mt-2">Below is an example demonstrating variables and data types in Java:</p>
+            
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+                <span class="text-gray-300">// FileName : "DataTypesExample.java"</span>
+                <span class="text-red-400">public class DataTypesExample {</span>
+                    <span class="text-yellow-400">public static void main(String[] args) {</span>
+                        int num = 100;
+                        double pi = 3.14159;
+                        char letter = 'J';
+                        boolean isCodingFun = true;
+                        
+                        System.out.println("Integer: " + num);
+                        System.out.println("Double: " + pi);
+                        System.out.println("Character: " + letter);
+                        System.out.println("Boolean: " + isCodingFun);
+                    }
+                }
+            </pre>
+        
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
+            <p class="text-gray-300 mt-2">
+                Understanding variables and data types is crucial in Java, as they define how data is stored and manipulated in a program.
+            </p>
+        </div>
+        <!-- Operators Section -->
+<div id="operators" class="content-section active">
+    <h1 class="text-4xl font-bold text-yellow-400 underline">Java Operators</h1>
+    <p class="mt-4 text-gray-300">Operators in Java are special symbols that perform operations on variables and values. They are essential for manipulating data in programs.</p>
+
+    <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Types of Operators</h2>
+    <ul class="list-disc pl-6 mt-2 text-gray-300">
+        <li><span class="text-yellow-300 font-semibold">Arithmetic Operators:</span> Used for mathematical calculations (e.g., +, -, *, /, %).</li>
+        <li><span class="text-yellow-300 font-semibold">Relational Operators:</span> Compare two values (e.g., ==, !=, >, <, >=, <=).</li>
+        <li><span class="text-yellow-300 font-semibold">Logical Operators:</span> Combine boolean expressions (e.g., &&, ||, !).</li>
+        <li><span class="text-yellow-300 font-semibold">Assignment Operators:</span> Assign values to variables (e.g., =, +=, -=, *=).</li>
+        <li><span class="text-yellow-300 font-semibold">Bitwise Operators:</span> Operate on bits (e.g., &, |, ^, ~, <<, >>).</li>
+        <li><span class="text-yellow-300 font-semibold">Unary Operators:</span> Operate on a single operand (e.g., ++, --).</li>
+    </ul>
+
+    <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Example Program</h2>
+    <p class="text-gray-300 mt-2">Here's an example showcasing some common operators:</p>
+    <pre class="bg-gray-800 p-4 rounded-lg text-white">
+        <span class="text-gray-300">// FileName: "OperatorsExample.java"</span>
+        <span class="text-red-400">public class OperatorsExample {</span>
+            <span class="text-yellow-400">public static void main(String[] args) {</span>
+                int a = 10, b = 5;
+                // Arithmetic
+                System.out.println("Sum: " + (a + b));
+                System.out.println("Modulus: " + (a % b));
+                // Relational
+                System.out.println("Is a > b? " + (a > b));
+                // Logical
+                boolean x = true, y = false;
+                System.out.println("x && y: " + (x && y));
+                // Assignment
+                a += 3; // a = a + 3
+                System.out.println("Updated a: " + a);
+                // Unary
+                a++;
+                System.out.println("Incremented a: " + a);
+            }
+        }
+    </pre>
+
+    <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
+    <p class="text-gray-300 mt-2">Operators are the building blocks of computation in Java, enabling you to perform everything from simple math to complex logical evaluations.</p>
+</div>
+
+<!-- Control Statements Section -->
+<div id="control-statements" class="content-section active">
+    <h1 class="text-4xl font-bold text-yellow-400 underline">Java Control Statements</h1>
+    <p class="mt-4 text-gray-300">Control statements in Java dictate the flow of execution in a program, allowing decisions and repetitions based on conditions.</p>
+
+    <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Types of Control Statements</h2>
+    <ul class="list-disc pl-6 mt-2 text-gray-300">
+        <li><span class="text-yellow-300 font-semibold">Decision-Making:</span> if, if-else, switch.</li>
+        <li><span class="text-yellow-300 font-semibold">Looping:</span> for, while, do-while.</li>
+        <li><span class="text-yellow-300 font-semibold">Branching:</span> break, continue, return.</li>
+    </ul>
+
+    <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Example Program</h2>
+    <p class="text-gray-300 mt-2">Here's an example using if-else and a for loop:</p>
+    <pre class="bg-gray-800 p-4 rounded-lg text-white">
+        <span class="text-gray-300">// FileName: "ControlExample.java"</span>
+        <span class="text-red-400">public class ControlExample {</span>
+            <span class="text-yellow-400">public static void main(String[] args) {</span>
+                int number = 10;
+                // Decision-Making
+                if (number > 0) {
+                    System.out.println(number + " is positive");
+                } else {
+                    System.out.println(number + " is negative or zero");
+                }
+                // Looping
+                System.out.println("Counting from 1 to 5:");
+                for (int i = 1; i <= 5; i++) {
+                    System.out.println(i);
+                }
+            }
+        }
+    </pre>
+
+    <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
+    <p class="text-gray-300 mt-2">Control statements give you the power to make your Java programs dynamic, adapting to different inputs and conditions.</p>
+</div>
+    <!-- Arrays Section -->
+<div id="arrays" class="content-section active">
+    <h1 class="text-4xl font-bold text-yellow-400 underline">Java Arrays</h1>
+    <p class="mt-4 text-gray-300">Arrays in Java are used to store multiple values of the same type in a single variable.</p>
+
+    <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Declaring and Using Arrays</h2>
+    <ul class="list-disc pl-6 mt-2 text-gray-300">
+        <li><span class="text-yellow-300 font-semibold">Syntax:</span> <code>type[] arrayName = new type[size];</code></li>
+        <li><span class="text-yellow-300 font-semibold">Access:</span> Use index starting from 0.</li>
+    </ul>
+
+    <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Example Program</h2>
+    <pre class="bg-gray-800 p-4 rounded-lg text-white">
+        <span class="text-gray-300">// FileName: "ArraysExample.java"</span>
+        <span class="text-red-400">public class ArraysExample {</span>
+            <span class="text-yellow-400">public static void main(String[] args) {</span>
+                int[] numbers = {1, 2, 3, 4, 5};
+                System.out.println("First element: " + numbers[0]);
+                System.out.println("Array length: " + numbers.length);
+                System.out.println("All elements:");
+                for (int i = 0; i < numbers.length; i++) {
+                    System.out.println(numbers[i]);
+                }
+            }
+        }
+    </pre>
+
+    <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
+    <p class="text-gray-300 mt-2">Arrays provide an efficient way to manage collections of data in Java.</p>
+</div>
+
+<!-- Strings Section -->
+<div id="strings" class="content-section active">
+    <h1 class="text-4xl font-bold text-yellow-400 underline">Java Strings</h1>
+    <p class="mt-4 text-gray-300">Strings in Java are objects that represent sequences of characters, handled by the <code>String</code> class.</p>
+
+    <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Key Features</h2>
+    <ul class="list-disc pl-6 mt-2 text-gray-300">
+        <li><span class="text-yellow-300 font-semibold">Immutable:</span> Strings cannot be changed once created.</li>
+        <li><span class="text-yellow-300 font-semibold">Methods:</span> length(), substring(), toUpperCase(), etc.</li>
+    </ul>
+
+    <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Example Program</h2>
+    <pre class="bg-gray-800 p-4 rounded-lg text-white">
+        <span class="text-gray-300">// FileName: "StringsExample.java"</span>
+        <span class="text-red-400">public class StringsExample {</span>
+            <span class="text-yellow-400">public static void main(String[] args) {</span>
+                String text = "Hello, Java!";
+                System.out.println("Length: " + text.length());
+                System.out.println("Substring: " + text.substring(0, 5));
+                System.out.println("Uppercase: " + text.toUpperCase());
+            }
+        }
+    </pre>
+
+    <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
+    <p class="text-gray-300 mt-2">Strings are versatile and widely used for text manipulation in Java.</p>
+</div>
+
+<!-- Methods Section -->
+<div id="methods" class="content-section active">
+    <h1 class="text-4xl font-bold text-yellow-400 underline">Java Methods</h1>
+    <p class="mt-4 text-gray-300">Methods in Java are blocks of code that perform specific tasks and can be reused.</p>
+
+    <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Defining a Method</h2>
+    <ul class="list-disc pl-6 mt-2 text-gray-300">
+        <li><span class="text-yellow-300 font-semibold">Syntax:</span> <code>returnType methodName(parameters) { body }</code></li>
+        <li><span class="text-yellow-300 font-semibold">Return:</span> Can return a value or void.</li>
+    </ul>
+
+    <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Example Program</h2>
+    <pre class="bg-gray-800 p-4 rounded-lg text-white">
+        <span class="text-gray-300">// FileName: "MethodsExample.java"</span>
+        <span class="text-red-400">public class MethodsExample {</span>
+            <span class="text-yellow-400">public static int add(int a, int b) {</span>
+                return a + b;
+            }
+            <span class="text-yellow-400">public static void main(String[] args) {</span>
+                int sum = add(5, 3);
+                System.out.println("Sum: " + sum);
+            }
+        }
+    </pre>
+
+    <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
+    <p class="text-gray-300 mt-2">Methods enhance code reusability and organization in Java programs.</p>
+</div>
+
+<!-- OOP Basics Section -->
+<div id="oop" class="content-section active">
+    <h1 class="text-4xl font-bold text-yellow-400 underline">OOP Basics in Java</h1>
+    <p class="mt-4 text-gray-300">Object-Oriented Programming (OOP) in Java revolves around objects and classes, promoting modularity and reusability.</p>
+
+    <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Core Principles</h2>
+    <ul class="list-disc pl-6 mt-2 text-gray-300">
+        <li><span class="text-yellow-300 font-semibold">Encapsulation:</span> Hiding data with access modifiers.</li>
+        <li><span class="text-yellow-300 font-semibold">Inheritance:</span> Reusing code via parent-child relationships.</li>
+        <li><span class="text-yellow-300 font-semibold">Polymorphism:</span> Multiple forms of a method.</li>
+        <li><span class="text-yellow-300 font-semibold">Abstraction:</span> Hiding complexity with interfaces/abstract classes.</li>
+    </ul>
+
+    <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
+    <p class="text-gray-300 mt-2">OOP principles form the backbone of Java’s design philosophy.</p>
+</div>
+
+<!-- Classes & Objects Section -->
+<div id="classes" class="content-section active">
+    <h1 class="text-4xl font-bold text-yellow-400 underline">Java Classes & Objects</h1>
+    <p class="mt-4 text-gray-300">Classes are blueprints for objects, which are instances with state and behavior.</p>
+
+    <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Example Program</h2>
+    <pre class="bg-gray-800 p-4 rounded-lg text-white">
+        <span class="text-gray-300">// FileName: "ClassesExample.java"</span>
+        <span class="text-red-400">public class ClassesExample {</span>
+            int x = 5; // Instance variable
+            <span class="text-yellow-400">public static void main(String[] args) {</span>
+                ClassesExample obj = new ClassesExample();
+                System.out.println("Value of x: " + obj.x);
+            }
+        }
+    </pre>
+
+    <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
+    <p class="text-gray-300 mt-2">Classes and objects are fundamental to implementing OOP in Java.</p>
+</div>
+
+<!-- Inheritance Section -->
+<div id="inheritance" class="content-section active">
+    <h1 class="text-4xl font-bold text-yellow-400 underline">Java Inheritance</h1>
+    <p class="mt-4 text-gray-300">Inheritance allows a class to inherit properties and methods from another class using the <code>extends</code> keyword.</p>
+
+    <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Example Program</h2>
+    <pre class="bg-gray-800 p-4 rounded-lg text-white">
+        <span class="text-gray-300">// FileName: "InheritanceExample.java"</span>
+        <span class="text-red-400">class Animal {</span>
+            void eat() { System.out.println("Eating..."); }
+        }
+        <span class="text-red-400">class Dog extends Animal {</span>
+            void bark() { System.out.println("Barking..."); }
+        }
+        <span class="text-red-400">public class InheritanceExample {</span>
+            <span class="text-yellow-400">public static void main(String[] args) {</span>
+                Dog dog = new Dog();
+                dog.eat();
+                dog.bark();
+            }
+        }
+    </pre>
+
+    <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
+    <p class="text-gray-300 mt-2">Inheritance promotes code reuse and establishes a hierarchy between classes.</p>
+</div>
+
+<!-- Polymorphism Section -->
+<div id="polymorphism" class="content-section active">
+    <h1 class="text-4xl font-bold text-yellow-400 underline">Java Polymorphism</h1>
+    <p class="mt-4 text-gray-300">Polymorphism allows methods to take multiple forms, achieved through method overriding or overloading.</p>
+
+    <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Example Program</h2>
+    <pre class="bg-gray-800 p-4 rounded-lg text-white">
+        <span class="text-gray-300">// FileName: "PolymorphismExample.java"</span>
+        <span class="text-red-400">class Animal {</span>
+            void sound() { System.out.println("Some sound..."); }
+        }
+        <span class="text-red-400">class Cat extends Animal {</span>
+            void sound() { System.out.println("Meow"); }
+        }
+        <span class="text-red-400">public class PolymorphismExample {</span>
+            <span class="text-yellow-400">public static void main(String[] args) {</span>
+                Animal myCat = new Cat();
+                myCat.sound();
+            }
+        }
+    </pre>
+
+    <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
+    <p class="text-gray-300 mt-2">Polymorphism enhances flexibility in Java programs.</p>
+</div>
+
+<!-- Abstraction & Interfaces Section -->
+<div id="abstraction" class="content-section active">
+    <h1 class="text-4xl font-bold text-yellow-400 underline">Java Abstraction & Interfaces</h1>
+    <p class="mt-4 text-gray-300">Abstraction hides implementation details, achieved using abstract classes or interfaces.</p>
+
+    <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Example Program</h2>
+    <pre class="bg-gray-800 p-4 rounded-lg text-white">
+        <span class="text-gray-300">// FileName: "AbstractionExample.java"</span>
+        <span class="text-red-400">interface Shape {</span>
+            void draw();
+        }
+        <span class="text-red-400">class Circle implements Shape {</span>
+            public void draw() { System.out.println("Drawing Circle"); }
+        }
+        <span class="text-red-400">public class AbstractionExample {</span>
+            <span class="text-yellow-400">public static void main(String[] args) {</span>
+                Shape circle = new Circle();
+                circle.draw();
+            }
+        }
+    </pre>
+
+    <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
+    <p class="text-gray-300 mt-2">Abstraction simplifies complex systems by exposing only necessary details.</p>
+</div>
+
+<!-- Exception Handling Section -->
+<div id="exceptions" class="content-section active">
+    <h1 class="text-4xl font-bold text-yellow-400 underline">Java Exception Handling</h1>
+    <p class="mt-4 text-gray-300">Exception handling in Java manages runtime errors using try-catch blocks.</p>
+
+    <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Example Program</h2>
+    <pre class="bg-gray-800 p-4 rounded-lg text-white">
+        <span class="text-gray-300">// FileName: "ExceptionsExample.java"</span>
+        <span class="text-red-400">public class ExceptionsExample {</span>
+            <span class="text-yellow-400">public static void main(String[] args) {</span>
+                try {
+                    int result = 10 / 0;
+                } catch (ArithmeticException e) {
+                    System.out.println("Error: " + e.getMessage());
+                }
+            }
+        }
+    </pre>
+
+    <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
+    <p class="text-gray-300 mt-2">Exception handling ensures programs run smoothly despite errors.</p>
+</div>
+
+<!-- File Handling Section -->
+<div id="file-handling" class="content-section active">
+    <h1 class="text-4xl font-bold text-yellow-400 underline">Java File Handling</h1>
+    <p class="mt-4 text-gray-300">File handling in Java allows reading from and writing to files using classes like <code>File</code> and <code>FileWriter</code>.</p>
+
+    <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Example Program</h2>
+    <pre class="bg-gray-800 p-4 rounded-lg text-white">
+        <span class="text-gray-300">// FileName: "FileHandlingExample.java"</span>
+        <span class="text-red-400">import java.io.FileWriter;</span>
+        <span class="text-red-400">public class FileHandlingExample {</span>
+            <span class="text-yellow-400">public static void main(String[] args) {</span>
+                try {
+                    FileWriter writer = new FileWriter("output.txt");
+                    writer.write("Hello, Java!");
+                    writer.close();
+                    System.out.println("File written successfully");
+                } catch (Exception e) {
+                    System.out.println("Error: " + e.getMessage());
+                }
+            }
+        }
+    </pre>
+
+    <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
+    <p class="text-gray-300 mt-2">File handling enables persistent data storage in Java applications.</p>
+</div>
+
+<!-- Multithreading Section -->
+<div id="multithreading" class="content-section active">
+    <h1 class="text-4xl font-bold text-yellow-400 underline">Java Multithreading</h1>
+    <p class="mt-4 text-gray-300">Multithreading allows concurrent execution of multiple threads to maximize CPU usage.</p>
+
+    <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Example Program</h2>
+    <pre class="bg-gray-800 p-4 rounded-lg text-white">
+        <span class="text-gray-300">// FileName: "MultithreadingExample.java"</span>
+        <span class="text-red-400">class MyThread extends Thread {</span>
+            public void run() {
+                System.out.println("Thread running");
+            }
+        }
+        <span class="text-red-400">public class MultithreadingExample {</span>
+            <span class="text-yellow-400">public static void main(String[] args) {</span>
+                MyThread thread = new MyThread();
+                thread.start();
+            }
+        }
+    </pre>
+
+    <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
+    <p class="text-gray-300 mt-2">Multithreading boosts performance in Java by running tasks in parallel.</p>
+</div>
+
+<!-- Collections Framework Section -->
+<div id="collections" class="content-section active">
+    <h1 class="text-4xl font-bold text-yellow-400 underline">Java Collections Framework</h1>
+    <p class="mt-4 text-gray-300">The Collections Framework provides data structures like lists, sets, and maps for efficient data management.</p>
+
+    <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Example Program</h2>
+    <pre class="bg-gray-800 p-4 rounded-lg text-white">
+        <span class="text-gray-300">// FileName: "CollectionsExample.java"</span>
+        <span class="text-red-400">import java.util.ArrayList;</span>
+        <span class="text-red-400">public class CollectionsExample {</span>
+            <span class="text-yellow-400">public static void main(String[] args) {</span>
+                ArrayList<String> list = new ArrayList<>();
+                list.add("Java");
+                list.add("Python");
+                System.out.println("List: " + list);
+            }
+        }
+    </pre>
+
+    <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
+    <p class="text-gray-300 mt-2">Collections simplify complex data operations in Java.</p>
+</div>
+
+<!-- Streams & Lambda Section -->
+<div id="streams" class="content-section active">
+    <h1 class="text-4xl font-bold text-yellow-400 underline">Java Streams & Lambda</h1>
+    <p class="mt-4 text-gray-300">Streams and lambda expressions (introduced in Java 8) enable functional-style operations on collections.</p>
+
+    <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Example Program</h2>
+    <pre class="bg-gray-800 p-4 rounded-lg text-white">
+        <span class="text-gray-300">// FileName: "StreamsExample.java"</span>
+        <span class="text-red-400">import java.util.Arrays;</span>
+        <span class="text-red-400">public class StreamsExample {</span>
+            <span class="text-yellow-400">public static void main(String[] args) {</span>
+                int[] numbers = {1, 2, 3, 4, 5};
+                int sum = Arrays.stream(numbers).sum();
+                System.out.println("Sum: " + sum);
+            }
+        }
+    </pre>
+
+    <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
+    <p class="text-gray-300 mt-2">Streams and lambdas make Java code more concise and expressive.</p>
+</div>
+
+<!-- JDBC Section -->
+<div id="jdbc" class="content-section active">
+    <h1 class="text-4xl font-bold text-yellow-400 underline">Java JDBC</h1>
+    <p class="mt-4 text-gray-300">JDBC (Java Database Connectivity) allows Java programs to interact with databases.</p>
+
+    <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Example Program</h2>
+    <pre class="bg-gray-800 p-4 rounded-lg text-white">
+        <span class="text-gray-300">// FileName: "JDBCExample.java"</span>
+        <span class="text-red-400">import java.sql.*;</span>
+        <span class="text-red-400">public class JDBCExample {</span>
+            <span class="text-yellow-400">public static void main(String[] args) {</span>
+                try {
+                    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/test", "root", "password");
+                    Statement stmt = conn.createStatement();
+                    ResultSet rs = stmt.executeQuery("SELECT * FROM users");
+                    while (rs.next()) {
+                        System.out.println(rs.getString("name"));
+                    }
+                    conn.close();
+                } catch (SQLException e) {
+                    System.out.println("Error: " + e.getMessage());
+                }
+            }
+        }
+    </pre>
+
+    <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
+    <p class="text-gray-300 mt-2">JDBC connects Java applications to databases for dynamic data handling.</p>
+</div>
+
+    </div>   
+        
+</body>
+</html>

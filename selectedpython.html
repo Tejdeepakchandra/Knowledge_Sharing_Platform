@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Programming Course</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        html { scroll-behavior: smooth; }
+        body { font-family: Arial, sans-serif; background: #0f3460; color: white; }
+        .sidebar {
+            width: 280px;
+            height: 100vh;
+            position: fixed;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-right: 1px solid rgba(255, 255, 255, 0.2);
+            overflow-y: auto;
+        }
+        .sidebar a { display: block; padding: 10px; margin: 5px 0; color: white; text-decoration: none; border-radius: 5px; transition: all 0.3s ease; cursor: pointer; }
+        .sidebar a:hover, .sidebar a.active { background: rgba(255, 255, 255, 0.2); font-weight: bold; }
+        .content { margin-left: 300px; padding: 20px; }
+        .code-block { background: #1e1e1e; padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; border-left: 5px solid #ffcc00; }
+        .content-section { display: none; }
+        .content-section.active { display: block; }
+    </style>
+    <script>
+        function showContent(sectionId, element) {
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+
+            document.querySelectorAll('.sidebar a').forEach(link => {
+                link.classList.remove('active');
+            });
+            element.classList.add('active');
+        }
+    </script>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <h2 class="text-xl font-bold mb-4"><i class="fas fa-code"></i> Python Programming Course</h2>
+        <a onclick="showContent('introduction', this)" class="active">Introduction</a>
+        <a onclick="showContent('installation', this)">Installation & Setup</a>
+        <a onclick="showContent('syntax', this)">Python Syntax</a>
+        <a onclick="showContent('variables', this)">Variables & Data Types</a>
+        <a onclick="showContent('operators', this)">Operators</a>
+        <a onclick="showContent('control-statements', this)">Control Statements</a>
+        <a onclick="showContent('lists', this)">Lists</a>
+        <a onclick="showContent('tuples', this)">Tuples</a>
+        <a onclick="showContent('dictionaries', this)">Dictionaries</a>
+        <a onclick="showContent('functions', this)">Functions</a>
+        <a onclick="showContent('classes', this)">Classes</a>
+        <a onclick="showContent('modules', this)">Modules</a>
+        <a onclick="showContent('file-handling', this)">File Handling</a>
+        <a onclick="showContent('exceptions', this)">Exception Handling</a>
+        <a onclick="showContent('generators', this)">Generators</a>
+        <a onclick="showContent('decorators', this)">Decorators</a>
+        <a onclick="showContent('lambdas', this)">Lambda Functions</a>
+        <a onclick="showContent('list-comprehensions', this)">List Comprehensions</a>
+        <a onclick="showContent('virtual-environments', this)">Virtual Environments</a>
+    </div>
+    
+    <!-- Content Section -->
+    <div class="content">
+        <div id="introduction" class="content-section active">
+            <h1 class="text-4xl font-bold text-yellow-400 underline">Welcome to Python Programming Course</h1>
+            <p class="mt-4 text-gray-300">
+                This course covers all the essential concepts of Python programming, from basic syntax to advanced topics like object-oriented programming, functional programming, and working with modules.
+            </p>
+        
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">What is Python?</h2>
+            <p class="text-gray-300 mt-2">
+                Python is a <span class="text-yellow-300 font-semibold">high-level, interpreted, general-purpose programming language</span> created by Guido van Rossum and first released in 1991. 
+                It emphasizes code readability with its notable use of significant whitespace and supports multiple programming paradigms including procedural, object-oriented, and functional programming.
+            </p>
+        
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">History of Python</h2>
+            <p class="text-gray-300 mt-2">
+                Python was conceived in the late 1980s by <span class="text-yellow-300 font-semibold">Guido van Rossum</span> at Centrum Wiskunde & Informatica (CWI) in the Netherlands as a successor to the ABC language. 
+                Python 2.0 was released in 2000, and Python 3.0 (a major, backwards-incompatible release) was released in 2008.
+            </p>
+            <ul class="list-disc pl-6 mt-2 text-gray-300">
+                <li>First released in February 1991 (version 0.9.0)</li>
+                <li>Python 2.0 released in 2000 introduced list comprehensions</li>
+                <li>Python 3.0 released in 2008 was a major revision not completely backwards-compatible</li>
+                <li>Python 2 was officially discontinued in 2020</li>
+            </ul>
+        
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Key Features of Python</h2>
+            <ul class="list-disc pl-6 mt-2 text-gray-300">
+                <li><span class="text-yellow-300 font-semibold">Easy to Learn:</span> Python has a simple syntax similar to the English language.</li>
+                <li><span class="text-yellow-300 font-semibold">Interpreted Language:</span> Python is processed at runtime by the interpreter.</li>
+                <li><span class="text-yellow-300 font-semibold">Cross-platform:</span> Python runs on Windows, Linux, Mac, etc.</li>
+                <li><span class="text-yellow-300 font-semibold">Large Standard Library:</span> Comes with batteries included for many tasks.</li>
+                <li><span class="text-yellow-300 font-semibold">Dynamic Typing:</span> No need to declare variable types.</li>
+                <li><span class="text-yellow-300 font-semibold">Memory Management:</span> Automatic garbage collection.</li>
+                <li><span class="text-yellow-300 font-semibold">Community Support:</span> Large active community with many third-party packages.</li>
+            </ul>
+        
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Python Code Execution</h2>
+            <ol class="list-decimal pl-6 mt-2 text-gray-300">
+                <li><span class="text-yellow-300 font-semibold">Writing the Program:</span> Developers write Python code in a text editor or IDE.</li>
+                <li><span class="text-yellow-300 font-semibold">Parsing:</span> The Python interpreter parses the source code into bytecode.</li>
+                <li><span class="text-yellow-300 font-semibold">Compilation:</span> The bytecode is compiled into platform-independent Python bytecode (.pyc files).</li>
+                <li><span class="text-yellow-300 font-semibold">Execution:</span> The Python Virtual Machine (PVM) executes the bytecode.</li>
+            </ol>
+        
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
+            <p class="text-gray-300 mt-2">
+                Python is a versatile and powerful programming language that is easy to learn yet capable of handling complex tasks. Its simplicity and readability make it an excellent choice for beginners and professionals alike.
+            </p>
+        </div>
+        
+        <div id="installation" class="content-section">
+            <h1 class="text-4xl font-bold text-yellow-400 underline">Python Installation & Setup</h1>
+            <p class="mt-4 text-gray-300">Follow these steps to install Python on different operating systems and set up your development environment.</p>
+        
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Installing Python</h2>
+            <p class="text-gray-300 mt-2">
+                Python comes pre-installed on most Unix systems including Linux and macOS, but you may want to install a newer version.
+            </p>
+        
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Installing on Windows</h2>
+            <ol class="list-decimal pl-6 mt-2 text-gray-300">
+                <li>Download the latest Python installer from <span class="text-yellow-300 font-semibold">python.org</span></li>
+                <li>Run the installer and check "Add Python to PATH"</li>
+                <li>Click "Install Now" and follow the prompts</li>
+                <li>Verify installation by opening Command Prompt and typing:
+                    <pre class="bg-gray-800 p-2 rounded">python --version</pre>
+                </li>
+            </ol>
+        
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Installing on Linux</h2>
+            <ol class="list-decimal pl-6 mt-2 text-gray-300">
+                <li>Most Linux distributions come with Python pre-installed. Check version:
+                    <pre class="bg-gray-800 p-2 rounded">python3 --version</pre>
+                </li>
+                <li>To install Python 3 on Debian/Ubuntu:
+                    <pre class="bg-gray-800 p-2 rounded">sudo apt update
+sudo apt install python3</pre>
+                </li>
+            </ol>
+        
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Installing on macOS</h2>
+            <ol class="list-decimal pl-6 mt-2 text-gray-300">
+                <li>macOS comes with Python 2.7 pre-installed. For Python 3:
+                    <pre class="bg-gray-800 p-2 rounded">brew install python</pre>
+                    or download from python.org
+                </li>
+                <li>Verify installation:
+                    <pre class="bg-gray-800 p-2 rounded">python3 --version</pre>
+                </li>
+            </ol>
+        
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Writing Your First Python Program</h2>
+            <p class="text-gray-300 mt-2">Create a file named hello.py with the following content:</p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+print("Hello, World!")</pre>
+            <p class="text-gray-300 mt-2">Run the program:</p>
+            <pre class="bg-gray-800 p-2 rounded">python hello.py</pre>
+        
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Using Python IDLE</h2>
+            <p class="text-gray-300 mt-2">
+                Python comes with an integrated development environment called IDLE where you can write and execute Python code interactively.
+            </p>
+        
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
+            <p class="text-gray-300 mt-2">
+                After following these steps, you'll have Python installed and ready to use. You can now start writing and running Python programs.
+            </p>
+        </div>
+        
+        <div id="syntax" class="content-section">
+            <h1 class="text-4xl font-bold text-yellow-400 underline">Python Syntax Basics</h1>
+            <p class="mt-4 text-gray-300">Python has a clean and readable syntax that emphasizes code readability.</p>
+            
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Structure of a Python Program</h2>
+            <p class="text-gray-300 mt-2">A basic Python program consists of statements that are executed sequentially:</p>
+            
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+<span class="text-gray-300"># This is a comment</span>
+print("Hello, Python!")  <span class="text-gray-300"># This prints a message</span>
+
+x = 5  <span class="text-gray-300"># Variable assignment</span>
+y = 10
+result = x + y
+
+print(f"The result is {result}")  <span class="text-gray-300"># f-string for string interpolation</span></pre>
+            
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Key Components</h2>
+            <ul class="list-disc pl-6 mt-2 text-gray-300">
+                <li><span class="text-yellow-300 font-semibold">Statements:</span> Instructions that Python can execute</li>
+                <li><span class="text-yellow-300 font-semibold">Variables:</span> Names that refer to values</li>
+                <li><span class="text-yellow-300 font-semibold">Expressions:</span> Combinations of values, variables, and operators</li>
+                <li><span class="text-yellow-300 font-semibold">Comments:</span> Explanatory notes ignored by the interpreter (# for single-line)</li>
+                <li><span class="text-yellow-300 font-semibold">Indentation:</span> Used to define code blocks (instead of curly braces)</li>
+            </ul>
+            
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Basic Syntax Rules</h2>
+            <ul class="list-disc pl-6 mt-2 text-gray-300">
+                <li>Python is case-sensitive</li>
+                <li>Statements don't need to end with semicolons (but can)</li>
+                <li>Code blocks are defined by indentation (typically 4 spaces)</li>
+                <li>Variables don't need type declarations</li>
+                <li>Function calls use parentheses ()</li>
+            </ul>
+            
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Running Python Code</h2>
+            <p class="text-gray-300 mt-2">Python code can be executed in several ways:</p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+<span class="text-gray-300"># From command line</span>
+python script.py
+
+<span class="text-gray-300"># Interactive interpreter</span>
+python
+>>> print("Hello")
+Hello</pre>
+            <p class="text-gray-300 mt-2">Python also supports interactive notebooks (Jupyter) for exploratory coding.</p>
+        </div>
+
+        <div id="variables" class="content-section">
+            <h1 class="text-4xl font-bold text-yellow-400 underline">Python Variables & Data Types</h1>
+            <p class="mt-4 text-gray-300">Variables in Python are used to store data values. Python has various built-in data types.</p>
+        
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Declaring Variables</h2>
+            <p class="text-gray-300 mt-2">Variables are created when you assign a value to them:</p>
+        
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+x = 5           <span class="text-gray-300"># Integer</span>
+y = 3.14        <span class="text-gray-300"># Float</span>
+name = "Alice"  <span class="text-gray-300"># String</span>
+is_active = True <span class="text-gray-300"># Boolean</span></pre>
+        
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Basic Data Types</h2>
+            <ul class="list-disc pl-6 mt-2 text-gray-300">
+                <li><span class="text-yellow-300 font-semibold">int:</span> Integer numbers (3, -5, 100)</li>
+                <li><span class="text-yellow-300 font-semibold">float:</span> Floating point numbers (3.14, -0.001)</li>
+                <li><span class="text-yellow-300 font-semibold">str:</span> Strings of characters ("hello", 'Python')</li>
+                <li><span class="text-yellow-300 font-semibold">bool:</span> Boolean values (True, False)</li>
+                <li><span class="text-yellow-300 font-semibold">NoneType:</span> Special type with one value None</li>
+            </ul>
+        
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Type Conversion</h2>
+            <p class="text-gray-300 mt-2">Python provides functions to convert between types:</p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+num = "123"
+num_int = int(num)  <span class="text-gray-300"># Convert to integer</span>
+
+pi = 3.14
+pi_str = str(pi)    <span class="text-gray-300"># Convert to string</span>
+
+flag = 1
+flag_bool = bool(flag) <span class="text-gray-300"># Convert to boolean</span></pre>
+        
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Dynamic Typing</h2>
+            <p class="text-gray-300 mt-2">Python is dynamically typed - variable types are determined at runtime:</p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+x = 5      <span class="text-gray-300"># x is an integer</span>
+x = "hello" <span class="text-gray-300"># Now x is a string</span></pre>
+        
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Variable Naming Rules</h2>
+            <ul class="list-disc pl-6 mt-2 text-gray-300">
+                <li>Can contain letters, digits, and underscores</li>
+                <li>Must begin with a letter or underscore</li>
+                <li>Cannot be a Python keyword</li>
+                <li>Case-sensitive</li>
+                <li>Should be descriptive (follow PEP 8 guidelines)</li>
+            </ul>
+        
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
+            <p class="text-gray-300 mt-2">
+                Python's flexible variable system and rich set of data types make it easy to work with different kinds of data.
+            </p>
+        </div>
+        
+        <!-- Operators Section -->
+        <div id="operators" class="content-section">
+            <h1 class="text-4xl font-bold text-yellow-400 underline">Python Operators</h1>
+            <p class="mt-4 text-gray-300">Operators in Python are used to perform operations on variables and values.</p>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Types of Operators</h2>
+            <ul class="list-disc pl-6 mt-2 text-gray-300">
+                <li><span class="text-yellow-300 font-semibold">Arithmetic:</span> +, -, *, /, // (floor division), % (modulus), ** (exponent)</li>
+                <li><span class="text-yellow-300 font-semibold">Comparison:</span> ==, !=, >, <, >=, <=</li>
+                <li><span class="text-yellow-300 font-semibold">Logical:</span> and, or, not</li>
+                <li><span class="text-yellow-300 font-semibold">Assignment:</span> =, +=, -=, *=, /=, etc.</li>
+                <li><span class="text-yellow-300 font-semibold">Identity:</span> is, is not (compare memory locations)</li>
+                <li><span class="text-yellow-300 font-semibold">Membership:</span> in, not in (check if value exists in sequence)</li>
+                <li><span class="text-yellow-300 font-semibold">Bitwise:</span> &, |, ^ (XOR), ~ (NOT), <<, >></li>
+            </ul>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Example Program</h2>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+# Arithmetic operators
+print(10 + 3)   # 13
+print(10 - 3)   # 7
+print(10 * 3)   # 30
+print(10 / 3)   # 3.333...
+print(10 // 3)  # 3 (floor division)
+print(10 % 3)   # 1 (modulus)
+print(10 ** 3)  # 1000 (exponent)
+
+# Comparison operators
+print(10 > 3)   # True
+print(10 == 10) # True
+print(10 != 5)  # True
+
+# Logical operators
+print(True and False)  # False
+print(True or False)   # True
+print(not True)        # False
+
+# Assignment operators
+x = 5
+x += 3  # Equivalent to x = x + 3
+print(x) # 8
+
+# Identity operators
+a = [1, 2, 3]
+b = a
+print(a is b)  # True (same object)</pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Operator Precedence</h2>
+            <p class="text-gray-300 mt-2">Operators are evaluated in a specific order when they appear together:</p>
+            <ol class="list-decimal pl-6 mt-2 text-gray-300">
+                <li>Parentheses ()</li>
+                <li>Exponentiation **</li>
+                <li>Multiplication/division/modulus/floor division (*, /, %, //)</li>
+                <li>Addition/subtraction (+, -)</li>
+                <li>Comparison operators (<, <=, >, >=, ==, !=)</li>
+                <li>Identity operators (is, is not)</li>
+                <li>Membership operators (in, not in)</li>
+                <li>Logical NOT (not)</li>
+                <li>Logical AND (and)</li>
+                <li>Logical OR (or)</li>
+            </ol>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
+            <p class="text-gray-300 mt-2">Operators are essential for performing computations and making decisions in Python programs.</p>
+        </div>
+
+        <!-- Control Statements Section -->
+        <div id="control-statements" class="content-section">
+            <h1 class="text-4xl font-bold text-yellow-400 underline">Python Control Statements</h1>
+            <p class="mt-4 text-gray-300">Control statements determine the flow of execution in a Python program.</p>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Types of Control Statements</h2>
+            <ul class="list-disc pl-6 mt-2 text-gray-300">
+                <li><span class="text-yellow-300 font-semibold">Conditional:</span> if, elif, else</li>
+                <li><span class="text-yellow-300 font-semibold">Loops:</span> for, while</li>
+                <li><span class="text-yellow-300 font-semibold">Loop Control:</span> break, continue, pass</li>
+            </ul>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Example Program</h2>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+# if-elif-else
+age = 20
+if age < 13:
+    print("Child")
+elif age < 20:
+    print("Teenager")
+else:
+    print("Adult")
+
+# for loop
+fruits = ["apple", "banana", "cherry"]
+for fruit in fruits:
+    print(fruit)
+
+# while loop
+count = 0
+while count < 5:
+    print(count)
+    count += 1
+
+# break and continue
+for num in range(10):
+    if num == 3:
+        continue  # Skip this iteration
+    if num == 8:
+        break     # Exit the loop
+    print(num)</pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Match-Case (Python 3.10+)</h2>
+            <p class="text-gray-300 mt-2">Python 3.10 introduced pattern matching similar to switch-case:</p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+status = 404
+match status:
+    case 200:
+        print("OK")
+    case 404:
+        print("Not Found")
+    case _:  # Default case
+        print("Unknown status")</pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
+            <p class="text-gray-300 mt-2">Control statements allow you to create complex program logic and handle different execution paths in Python.</p>
+        </div>
+
+        <!-- Lists Section -->
+        <div id="lists" class="content-section">
+            <h1 class="text-4xl font-bold text-yellow-400 underline">Python Lists</h1>
+            <p class="mt-4 text-gray-300">Lists in Python are ordered, mutable collections that can hold items of different types.</p>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Creating Lists</h2>
+            <p class="text-gray-300 mt-2">Lists are created using square brackets:</p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+fruits = ["apple", "banana", "cherry"]  <span class="text-gray-300"># List of strings</span>
+numbers = [1, 2, 3, 4, 5]              <span class="text-gray-300"># List of integers</span>
+mixed = [1, "hello", 3.14, True]       <span class="text-gray-300"># Mixed types</span></pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Accessing List Elements</h2>
+            <p class="text-gray-300 mt-2">List elements are accessed using their index (starting from 0):</p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+fruits = ["apple", "banana", "cherry"]
+print(fruits[0])  <span class="text-gray-300"># "apple"</span>
+print(fruits[-1]) <span class="text-gray-300"># "cherry" (negative index counts from end)</span></pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">List Operations</h2>
+            <p class="text-gray-300 mt-2">Lists support various operations:</p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+numbers = [1, 2, 3]
+
+# Modifying elements
+numbers[1] = 20  # [1, 20, 3]
+
+# Adding elements
+numbers.append(4)      # [1, 20, 3, 4]
+numbers.insert(1, 1.5) # [1, 1.5, 20, 3, 4]
+
+# Removing elements
+numbers.remove(20)     # [1, 1.5, 3, 4]
+popped = numbers.pop() # [1, 1.5, 3], returns 4
+
+# Slicing
+print(numbers[1:3])    # [1.5, 3]</pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">List Methods</h2>
+            <ul class="list-disc pl-6 mt-2 text-gray-300">
+                <li><span class="text-yellow-300 font-semibold">append():</span> Adds an element at the end</li>
+                <li><span class="text-yellow-300 font-semibold">extend():</span> Adds elements from another list</li>
+                <li><span class="text-yellow-300 font-semibold">insert():</span> Inserts an element at a specific position</li>
+                <li><span class="text-yellow-300 font-semibold">remove():</span> Removes the first matching element</li>
+                <li><span class="text-yellow-300 font-semibold">pop():</span> Removes and returns an element at given index</li>
+                <li><span class="text-yellow-300 font-semibold">sort():</span> Sorts the list</li>
+                <li><span class="text-yellow-300 font-semibold">reverse():</span> Reverses the list</li>
+                <li><span class="text-yellow-300 font-semibold">copy():</span> Returns a shallow copy</li>
+            </ul>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
+            <p class="text-gray-300 mt-2">Lists are versatile and fundamental data structures in Python that can store collections of items efficiently.</p>
+        </div>
+
+        <!-- Tuples Section -->
+        <div id="tuples" class="content-section">
+            <h1 class="text-4xl font-bold text-yellow-400 underline">Python Tuples</h1>
+            <p class="mt-4 text-gray-300">Tuples are ordered, immutable collections that can hold items of different types.</p>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Creating Tuples</h2>
+            <p class="text-gray-300 mt-2">Tuples are created using parentheses:</p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+coordinates = (10, 20)          <span class="text-gray-300"># Tuple of integers</span>
+colors = ("red", "green", "blue") <span class="text-gray-300"># Tuple of strings</span>
+single = (5,)                   <span class="text-gray-300"># Single-element tuple (note comma)</span></pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Accessing Tuple Elements</h2>
+            <p class="text-gray-300 mt-2">Tuple elements are accessed using their index (starting from 0):</p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+colors = ("red", "green", "blue")
+print(colors[0])  <span class="text-gray-300"># "red"</span>
+print(colors[-1]) <span class="text-gray-300"># "blue" (negative index counts from end)</span></pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Tuple Operations</h2>
+            <p class="text-gray-300 mt-2">Tuples support various operations (but are immutable):</p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+t1 = (1, 2, 3)
+t2 = (4, 5, 6)
+
+# Concatenation
+t3 = t1 + t2  # (1, 2, 3, 4, 5, 6)
+
+# Repetition
+t4 = t1 * 2   # (1, 2, 3, 1, 2, 3)
+
+# Membership
+print(2 in t1) # True
+
+# Slicing
+print(t3[2:5]) # (3, 4, 5)</pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Tuple Methods</h2>
+            <p class="text-gray-300 mt-2">Tuples have only two methods:</p>
+            <ul class="list-disc pl-6 mt-2 text-gray-300">
+                <li><span class="text-yellow-300 font-semibold">count():</span> Returns number of occurrences of a value</li>
+                <li><span class="text-yellow-300 font-semibold">index():</span> Returns first index of a value</li>
+            </ul>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">When to Use Tuples</h2>
+            <ul class="list-disc pl-6 mt-2 text-gray-300">
+                <li>When you need an immutable sequence</li>
+                <li>When you need to use a collection as a dictionary key</li>
+                <li>When you need to ensure data integrity</li>
+                <li>When working with functions that return multiple values</li>
+            </ul>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
+            <p class="text-gray-300 mt-2">Tuples are useful when you need an immutable collection of items, often used for fixed data.</p>
+        </div>
+
+        <!-- Dictionaries Section -->
+        <div id="dictionaries" class="content-section">
+            <h1 class="text-4xl font-bold text-yellow-400 underline">Python Dictionaries</h1>
+            <p class="mt-4 text-gray-300">Dictionaries are unordered, mutable collections of key-value pairs.</p>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Creating Dictionaries</h2>
+            <p class="text-gray-300 mt-2">Dictionaries are created using curly braces:</p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+person = {"name": "Alice", "age": 25, "city": "New York"}  <span class="text-gray-300"># Key-value pairs</span>
+empty_dict = {}                                           <span class="text-gray-300"># Empty dictionary</span></pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Accessing Dictionary Elements</h2>
+            <p class="text-gray-300 mt-2">Dictionary elements are accessed using their keys:</p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+person = {"name": "Alice", "age": 25}
+
+print(person["name"])  <span class="text-gray-300"># "Alice"</span>
+print(person.get("age")) <span class="text-gray-300"># 25</span>
+print(person.get("city", "Unknown")) <span class="text-gray-300"># "Unknown" (default if key doesn't exist)</span></pre>
+
+Certainly! Here’s the continuation of the HTML code, focusing on dictionaries and additional sections:
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Modifying Dictionaries</h2>
+            <p class="text-gray-300 mt-2">You can add, update, or remove key-value pairs:</p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+person = {"name": "Alice", "age": 25}
+
+# Adding a new key-value pair
+person["city"] = "New York"  # {"name": "Alice", "age": 25, "city": "New York"}
+
+# Updating an existing key
+person["age"] = 26  # {"name": "Alice", "age": 26, "city": "New York"}
+
+# Removing a key-value pair
+del person["city"]  # {"name": "Alice", "age": 26}</pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Dictionary Methods</h2>
+            <p class="text-gray-300 mt-2">Dictionaries have several useful methods:</p>
+            <ul class="list-disc pl-6 mt-2 text-gray-300">
+                <li><span class="text-yellow-300 font-semibold">keys():</span> Returns a view object of all keys</li>
+                <li><span class="text-yellow-300 font-semibold">values():</span> Returns a view object of all values</li>
+                <li><span class="text-yellow-300 font-semibold">items():</span> Returns a view object of all key-value pairs</li>
+                <li><span class="text-yellow-300 font-semibold">clear():</span> Removes all items</li>
+                <li><span class="text-yellow-300 font-semibold">copy():</span> Returns a shallow copy of the dictionary</li>
+            </ul>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Iterating Through a Dictionary</h2>
+            <p class="text-gray-300 mt-2">You can iterate through keys, values, or key-value pairs:</p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+person = {"name": "Alice", "age": 25}
+
+# Iterating through keys
+for key in person:
+    print(key)
+
+# Iterating through values
+for value in person.values():
+    print(value)
+
+# Iterating through key-value pairs
+for key, value in person.items():
+    print(f"{key}: {value}")</pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
+            <p class="text-gray-300 mt-2">Dictionaries are powerful data structures that allow you to store and manage data in key-value pairs, making data retrieval efficient.</p>
+        </div>
+
+        <!-- Functions Section -->
+        <div id="functions" class="content-section">
+            <h1 class="text-4xl font-bold text-yellow-400 underline">Python Functions</h1>
+            <p class="mt-4 text-gray-300">Functions are reusable blocks of code that perform a specific task.</p>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Defining a Function</h2>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+def greet(name):
+    return f"Hello, {name}!"</pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Calling a Function</h2>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+print(greet("Alice"))  # Output: Hello, Alice!</pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Function Parameters</h2>
+            <p class="text-gray-300 mt-2">Functions can take parameters to operate on:</p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+def add(a, b):
+    return a + b
+
+print(add(5, 3))  # Output: 8</pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Default Parameters</h2>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+def greet(name="Guest"):
+    return f"Hello, {name}!"
+
+print(greet())        # Output: Hello, Guest!
+print(greet("Alice")) # Output: Hello, Alice!</pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Return Statement</h2>
+            <p class="text-gray-300 mt-2">The <code>return</code> statement is used to send back a value from a function:</p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+def square(x):
+    return x * x
+
+result = square(4)
+print(result)  # Output: 16</pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Lambda Functions</h2>
+            <p class="text-gray-300 mt-2">Lambda functions are anonymous functions defined with the <code>lambda</code> keyword:</p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+square = lambda x: x * x
+print(square(5))  # Output: 25</pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
+            <p class="text-gray-300 mt-2">Functions are a key feature in Python that promote code reusability and organization. Understanding how to define and use functions is essential for effective programming.</p>
+        </div>
+
+        <!-- Classes Section -->
+        <div id="classes" class="content-section">
+            <h1 class="text-4xl font-bold text-yellow-400 underline">Python Classes & Objects</h1>
+            <p class="mt-4 text-gray-300">Python is an object-oriented programming language, which means it allows you to define classes and create objects.</p>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Defining a Class</h2>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+class Dog:
+    def _init_(self, name, age):
+        self.name = name
+        self.age = age</pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Creating an Object</h2>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+my_dog = Dog("Buddy", 3)</pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Accessing Attributes</h2>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+print(my_dog.name)  # Output: Buddy
+print(my_dog.age)   # Output: 3</pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Defining Methods</h2>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+class Dog:
+    def bark(self):
+        return "Woof!"</pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Using Methods</h2>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+print(my_dog.bark())  # Output: Woof!</pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Inheritance</h2>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+class Puppy(Dog):
+    def play(self):
+        return "Playing!"</pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
+            <p class="text-gray-300 mt-2">Classes and objects are fundamental to object-oriented programming in Python, allowing for encapsulation and code reuse.</p>
+        </div>
+
+        <!-- Modules Section -->
+        <div id="modules" class="content-section">
+            <h1 class="text-4xl font-bold text-yellow-400 underline">Python Modules</h1>
+            <p class="mt-4 text-gray-300">Modules are files containing Python code that can define functions, classes, and variables.</p>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Creating a Module</h2>
+            <p class="text-gray-300 mt-2">To create a module, simply save a Python file with a .py extension:</p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+# my_module.py
+def greet(name):
+    return f"Hello, {name}!"</pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Importing a Module</h2>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+import my_module
+
+print(my_module.greet("Alice"))  # Output: Hello, Alice!</pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">From Import</h2>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+from my_module import greet
+
+print(greet("Bob"))  # Output: Hello, Bob!</pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
+            <p class="text-gray-300 mt-2">Modules help organize code into manageable sections, promoting code reuse and better structure.</p>
+        </div>
+
+        <!-- File Handling Section -->
+        <div id="file-handling" class="content-section">
+            <h1 class="text-4xl font-bold text-yellow-400 underline">File Handling in Python</h1>
+            <p class="mt-4 text-gray-300">Python provides built-in functions to create, read, update, and delete files.</p>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Opening a File</h2>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+file = open("example.txt", "r")  # Open for reading</pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Reading from a File</h2>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+content = file.read()  # Read entire file
+file.close()  # Close the file</pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Writing to a File</h2>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+with open("example.txt", "w") as file:
+    file.write("Hello, World!")  # Write to file</pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
+            <p class="text-gray-300 mt-2">File handling is essential for data persistence, allowing you to store and retrieve data from files.</p>
+        </div>
+
+        <!-- Exception Handling Section -->
+        <div id="exceptions" class="content-section">
+            <h1 class="text-4xl font-bold text-yellow-400 underline">Exception Handling in Python</h1>
+            <p class="mt-4 text-gray-300">Exceptions are errors that occur during program execution. Python provides a way to handle these errors gracefully.</p>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Try and Except</h2>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+try:
+    result = 10 / 0  # This will raise an exception
+except ZeroDivisionError:
+    print("Cannot divide by zero!")</pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Finally Block</h2>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+try:
+    file = open("example.txt", "r")
+except FileNotFoundError:
+    print("File not found!")
+finally:
+    print("Execution completed.")</pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
+            <p class="text-gray-300 mt-2">Exception handling is crucial for building robust applications that can handle unexpected errors gracefully.</p>
+        </div>
+
+        <!-- Generators Section -->
+        <div id="generators" class="content-section">
+            <h1 class="text-4xl font-bold text-yellow-400 underline">Python Generators</h1>
+            <p class="mt-4 text-gray-300">Generators are a way to create iterators using a function that yields values instead of returning them.</p>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Creating a Generator</h2>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+def count_up_to(n):
+    count = 1
+    while count <= n:
+        yield count
+        count += 1</pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Using a Generator</h2>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+for number in count_up_to(5):
+    print(number)  # Outputs: 1 2 3 4 5</pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
+            <p class="text-gray-300 mt-2">Generators provide a memory-efficient way to handle large datasets by yielding items one at a time.</p>
+        </div>
+
+        <!-- Decorators Section -->
+        <div id="decorators" class="content-section">
+            <h1 class="text-4xl font-bold text-yellow-400 underline">Python Decorators</h1>
+            <p class="mt-4 text-gray-300">Decorators are a way to modify or enhance functions or methods without changing their code.</p>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Creating a Decorator</h2>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+def my_decorator(func):
+    def wrapper():
+        print("Something is happening before the function is called.")
+        func()
+        print("Something is happening after the function is called.")
+    return wrapper</pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Using a Decorator</h2>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+@my_decorator
+def say_hello():
+    print("Hello!")
+
+say_hello()  # Outputs: Something is happening before... Hello! ...after the function is called.</pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
+            <p class="text-gray-300 mt-2">Decorators are a powerful tool for enhancing the functionality of functions and methods in a clean and readable way.</p>
+        </div>
+
+        <!-- Lambda Functions Section -->
+        <div id="lambdas" class="content-section">
+            <h1 class="text-4xl font-bold text-yellow-400 underline">Python Lambda Functions</h1>
+            <p class="mt-4 text-gray-300">Lambda functions are small anonymous functions defined with the <code>lambda</code> keyword.</p>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Creating a Lambda Function</h2>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+add = lambda x, y: x + y</pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Using a Lambda Function</h2>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+print(add(5, 3))  # Output: 8</pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
+            <p class="text-gray-300 mt-2">Lambda functions are useful for creating small, throwaway functions without the need for a full function definition.</p>
+        </div>
+
+        <!-- List Comprehensions Section -->
+        <div id="list-comprehensions" class="content-section">
+            <h1 class="text-4xl font-bold text-yellow-400 underline">Python List Comprehensions</h1>
+            <p class="mt-4 text-gray-300">List comprehensions provide a concise way to create lists based on existing lists.</p>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Creating a List Comprehension</h2>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+squares = [x**2 for x in range(10)]</pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Using a List Comprehension</h2>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+print(squares)  # Output: [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]</pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
+            <p class="text-gray-300 mt-2">List comprehensions are a powerful feature that allows for more readable and efficient list creation.</p>
+        </div>
+
+        <!-- Virtual Environments Section -->
+        <div id="virtual-environments" class="content-section">
+            <h1 class="text-4xl font-bold text-yellow-400 underline">Python Virtual Environments</h1>
+            <p class="mt-4 text-gray-300">Virtual environments allow you to create isolated Python environments for different projects.</p>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Creating a Virtual Environment</h2>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+python -m venv myenv</pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Activating a Virtual Environment</h2>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+# On Windows
+myenv\Scripts\activate
+
+# On macOS/Linux
+source myenv/bin/activate</pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
+            <p class="text-gray-300 mt-2">Using virtual environments is essential for managing dependencies and avoiding conflicts between projects.</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHP Programming Course</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        html { scroll-behavior: smooth; }
+        body { font-family: Arial, sans-serif; background: #0f3460; color: white; }
+        .sidebar {
+            width: 280px;
+            height: 100vh;
+            position: fixed;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-right: 1px solid rgba(255, 255, 255, 0.2);
+            overflow-y: auto;
+        }
+        .sidebar a { display: block; padding: 10px; margin: 5px 0; color: white; text-decoration: none; border-radius: 5px; transition: all 0.3s ease; cursor: pointer; }
+        .sidebar a:hover, .sidebar a.active { background: rgba(255, 255, 255, 0.2); font-weight: bold; }
+        .content { margin-left: 300px; padding: 20px; }
+        .code-block { background: #1e1e1e; padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; border-left: 5px solid #ffcc00; }
+        .content-section { display: none; }
+        .content-section.active { display: block; }
+    </style>
+    <script>
+        function showContent(sectionId, element) {
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+
+            document.querySelectorAll('.sidebar a').forEach(link => {
+                link.classList.remove('active');
+            });
+            element.classList.add('active');
+        }
+    </script>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <h2 class="text-xl font-bold mb-4"><i class="fas fa-code"></i> PHP Programming Course</h2>
+        <a onclick="showContent('introduction', this)" class="active">Introduction</a>
+        <a onclick="showContent('installation', this)">Installation & Setup</a>
+        <a onclick="showContent('syntax', this)">PHP Syntax</a>
+        <a onclick="showContent('variables', this)">Variables & Data Types</a>
+        <a onclick="showContent('operators', this)">Operators</a>
+        <a onclick="showContent('control-statements', this)">Control Statements</a>
+        <a onclick="showContent('functions', this)">Functions</a>
+        <a onclick="showContent('arrays', this)">Arrays</a>
+        <a onclick="showContent('strings', this)">Strings</a>
+        <a onclick="showContent('file-handling', this)">File Handling</a>
+        <a onclick="showContent('sessions', this)">Sessions & Cookies</a>
+        <a onclick="showContent('error-handling', this)">Error Handling</a>
+        <a onclick="showContent('object-oriented', this)">Object-Oriented PHP</a>
+        <a onclick="showContent('database', this)">Database Interaction</a>
+        <a onclick="showContent('security', this)">Security Best Practices</a>
+    </div>
+    
+    <!-- Content Section -->
+    <div class="content">
+        <div id="introduction" class="content-section active">
+            <h1 class="text-4xl font-bold text-yellow-400 underline">Welcome to PHP Programming Course</h1>
+            <p class="mt-4 text-gray-300">
+                This course covers all the essential concepts of PHP programming, from basic syntax to advanced topics like object-oriented programming and database interaction.
+            </p>
+        
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">What is PHP?</h2>
+            <p class="text-gray-300 mt-2">
+                PHP is a <span class="text-yellow-300 font-semibold">server-side scripting language</span> designed primarily for web development but also used as a general-purpose programming language.
+            </p>
+        
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">History of PHP</h2>
+            <p class="text-gray-300 mt-2">
+                PHP was created by <span class="text-yellow-300 font-semibold">Rasmus Lerdorf</span> in <span class="text-yellow-300 font-semibold">1994</span> and has evolved significantly over the years.
+            </p>
+        
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Key Features of PHP</h2>
+            <ul class="list-disc pl-6 mt-2 text-gray-300">
+                <li><span class="text-yellow-300 font-semibold">Open Source:</span> PHP is free to use and distribute.</li>
+                <li><span class="text-yellow-300 font-semibold">Cross-Platform:</span> Runs on various platforms like Windows, Linux, and macOS.</li>
+                <li><span class="text-yellow-300 font-semibold">Database Support:</span> Easily connects to various databases like MySQL, PostgreSQL, and SQLite.</li>
+                <li><span class="text-yellow-300 font-semibold">Rich Library:</span> Extensive built-in functions and libraries.</li>
+            </ul>
+        
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
+            <p class="text-gray-300 mt-2">
+                PHP is a powerful tool for making dynamic and interactive web pages. Its ease of use and flexibility make it a popular choice among developers.
+            </p>
+        </div>
+        
+        <div id="installation" class="content-section">
+            <h1 class="text-4xl font-bold text-yellow-400 underline">PHP Installation & Setup</h1>
+            <p class="mt-4 text-gray-300">Follow these steps to install PHP on different operating systems and set up your development environment.</p>
+        
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Installing PHP on Windows</h2>
+            <ol class="list-decimal pl-6 mt-2 text-gray-300">
+                <li>Download PHP from the official website <span class="text-yellow-300 font-semibold">php.net</span></li>
+                <li>Extract the files to a directory (e.g., C:\php)</li>
+                <li>Add PHP to your system PATH:
+                    <ul class="list-disc pl-6 mt-2">
+                        <li>Right-click on "This PC" → Properties → Advanced system settings</li>
+                        <li>Click "Environment Variables" → Under "System variables", find "Path" and click "Edit"</li>
+                        <li>Add the path to PHP directory (e.g., C:\php)</li>
+                    </ul>
+                </li>
+                <li>Verify installation by opening Command Prompt and typing:
+                    <pre class="bg-gray-800 p-2 rounded">php -v</pre>
+                </li>
+            </ol>
+        
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Installing PHP on Linux</h2>
+            <ol class="list-decimal pl-6 mt-2 text-gray-300">
+                <li>Open terminal and install PHP:
+                    <pre class="bg-gray-800 p-2 rounded">sudo apt update
+sudo apt install php</pre>
+                </li>
+                <li>Verify installation:
+                    <pre class="bg-gray-800 p-2 rounded">php -v</pre>
+                </li>
+            </ol>
+        
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Installing PHP on macOS</h2>
+            <ol class="list-decimal pl-6 mt-2 text-gray-300">
+                <li>Install Homebrew if you haven't already:
+                    <pre class="bg-gray-800 p-2 rounded">/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</pre>
+                </li>
+                <li>Install PHP:
+                    <pre class="bg-gray-800 p-2 rounded">brew install php</pre>
+                </li>
+                <li>Verify installation:
+                    <pre class="bg-gray-800 p-2 rounded">php -v</pre>
+                </li>
+            </ol>
+        
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Writing Your First PHP Script</h2>
+            <p class="text-gray-300 mt-2">Create a file named hello.php with the following content:</p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+&lt;?php
+echo "Hello, World!";
+?&gt;</pre>
+            <p class="text-gray-300 mt-2">Run the script from the command line:</p>
+            <pre class="bg-gray-800 p-2 rounded">php hello.php</pre>
+        
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
+            <p class="text-gray-300 mt-2">
+                After following these steps, you'll have a working PHP development environment ready to create and run PHP scripts.
+            </p>
+        </div>
+        
+        <div id="syntax" class="content-section">
+            <h1 class="text-4xl font-bold text-yellow-400 underline">PHP Syntax Basics</h1>
+            <p class="mt-4 text-gray-300">PHP is a server-side scripting language with a straightforward syntax.</p>
+            
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Structure of a PHP Script</h2>
+            <p class="text-gray-300 mt-2">A basic PHP script consists of PHP tags and statements:</p>
+            
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+&lt;?php
+// PHP code goes here
+echo "Hello, PHP!";
+?&gt;</pre>
+            
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Key Components</h2>
+            <ul class="list-disc pl-6 mt-2 text-gray-300">
+                <li><span class="text-yellow-300 font-semibold">PHP Tags:</span> PHP code is enclosed within &lt;?php and ?&gt; tags.</li>
+                <li><span class="text-yellow-300 font-semibold">Statements:</span> Instructions that end with a semicolon (;)</li>
+                <li><span class="text-yellow-300 font-semibold">Comments:</span> Explanatory notes ignored by the interpreter (// for single-line, /* */ for multi-line)</li>
+            </ul>
+            
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Basic Syntax Rules</h2>
+            <ul class="list-disc pl-6 mt-2 text-gray-300">
+                <li>PHP is case-sensitive</li>
+                <li>Statements end with a semicolon (;)</li>
+                <li>Whitespace is ignored (except in strings)</li>
+                <li>Variables start with a dollar sign ($)</li>
+            </ul>
+            
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
+            <p class="text-gray-300 mt-2">Understanding the basic syntax is essential for writing PHP scripts effectively.</p>
+        </div>
+
+        <div id="variables" class="content-section">
+            <h1 class="text-4xl font-bold text-yellow-400 underline">PHP Variables & Data Types</h1>
+            <p class="mt-4 text-gray-300">Variables in PHP are containers for storing data values, each with a specific type.</p>
+        
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Declaring Variables</h2>
+            <p class="text-gray-300 mt-2">Variable declaration in PHP is straightforward:</p>
+        
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+$age = 25;          // Integer
+$price = 19.99;     // Float
+$grade = 'A';       // String
+$isStudent = true;  // Boolean</pre>
+        
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Basic Data Types</h2>
+            <ul class="list-disc pl-6 mt-2 text-gray-300">
+                <li><span class="text-yellow-300 font-semibold">int:</span> Integer numbers</li>
+                <li><span class="text-yellow-300 font-semibold">float:</span> Floating point numbers</li>
+                <li><span class="text-yellow-300 font-semibold">string:</span> Sequence of characters</li>
+                <li><span class="text-yellow-300 font-semibold">bool:</span> Boolean values (true/false)</li>
+                <li><span class="text-yellow-300 font-semibold">array:</span> Collection of values</li>
+                <li><span class="text-yellow-300 font-semibold">object:</span> Instance of a class</li>
+                <li><span class="text-yellow-300 font-semibold">NULL:</span> Represents a variable with no value</li>
+            </ul>
+        
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Variable Naming Rules</h2>
+            <ul class="list-disc pl-6 mt-2 text-gray-300">
+                <li>Can contain letters, digits, and underscores</li>
+                <li>Must begin with a letter or underscore</li>
+                <li>Cannot be a PHP keyword</li>
+                <li>Case-sensitive</li>
+            </ul>
+        
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
+            <p class="text-gray-300 mt-2">
+                Understanding variables and data types is fundamental to PHP programming, as they define how data is stored and manipulated.
+            </p>
+        </div>
+        
+        <!-- Operators Section -->
+        <div id="operators" class="content-section">
+            <h1 class="text-4xl font-bold text-yellow-400 underline">PHP Operators</h1>
+            <p class="mt-4 text-gray-300">Operators in PHP are symbols that perform operations on variables and values.</p>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Types of Operators</h2>
+            <ul class="list-disc pl-6 mt-2 text-gray-300">
+                <li><span class="text-yellow-300 font-semibold">Arithmetic:</span> +, -, *, /, % (modulus)</li>
+                <li><span class="text-yellow-300 font-semibold">Relational:</span> ==, !=, >, <, >=, <=</li>
+                <li><span class="text-yellow-300 font-semibold">Logical:</span> && (AND), || (OR), ! (NOT)</li>
+                <li><span class="text-yellow-300 font-semibold">Assignment:</span> =, +=, -=, *=, /=, %=</li>
+                <li><span class="text-yellow-300 font-semibold">Increment/Decrement:</span> ++, --</li>
+                <li><span class="text-yellow-300 font-semibold">Ternary:</span> ? : (conditional operator)</li>
+            </ul>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Example Program</h2>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+<?php
+$a = 10;
+$b = 5;
+
+// Arithmetic
+echo "Sum: " . ($a + $b) . "\n";
+echo "Modulus: " . ($a % $b) . "\n";
+
+// Relational
+echo "Is a > b? " . ($a > $b) . "\n";
+
+// Logical
+$x = true;
+$y = false;
+echo "x && y: " . ($x && $y) . "\n";
+
+// Assignment
+$a += 3; // a = a + 3
+echo "Updated a: " . $a . "\n";
+
+// Increment
+$a++;
+echo "Incremented a: " . $a . "\n";
+?></pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
+            <p class="text-gray-300 mt-2">Operators are essential for performing computations and making decisions in PHP programs.</p>
+        </div>
+
+        <!-- Control Statements Section -->
+        <div id="control-statements" class="content-section">
+            <h1 class="text-4xl font-bold text-yellow-400 underline">PHP Control Statements</h1>
+            <p class="mt-4 text-gray-300">Control statements determine the flow of execution in a PHP program.</p>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Types of Control Statements</h2>
+            <ul class="list-disc pl-6 mt-2 text-gray-300">
+                <li><span class="text-yellow-300 font-semibold">Decision Making:</span> if, if-else, switch-case</li>
+                <li><span class="text-yellow-300 font-semibold">Loops:</span> for, while, do-while</li>
+                <li><span class="text-yellow-300 font-semibold">Branching:</span> break, continue, return</li>
+            </ul>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Example Program</h2>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+<?php
+$number = 10;
+
+// if-else
+if ($number > 0) {
+    echo "$number is positive\n";
+} elseif ($number < 0) {
+    echo "$number is negative\n";
+} else {
+    echo "Number is zero\n";
+}
+
+// switch-case
+switch($number) {
+    case 5:
+        echo "Five\n";
+        break;
+    case 10:
+        echo "Ten\n";
+        break;
+    default:
+        echo "Other number\n";
+}
+
+// for loop
+echo "Counting from 1 to 5:\n";
+for ($i = 1; $i <= 5; $i++) {
+    echo "$i ";
+}
+echo "\n";
+
+// while loop
+$j = 5;
+while ($j > 0) {
+    echo "$j ";
+    $j--;
+}
+echo "\n";
+?></pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
+            <p class="text-gray-300 mt-2">Control statements allow you to create complex program logic and handle different execution paths.</p>
+        </div>
+
+        <!-- Functions Section -->
+        <div id="functions" class="content-section">
+            <h1 class="text-4xl font-bold text-yellow-400 underline">PHP Functions</h1>
+            <p class="mt-4 text-gray-300">Functions in PHP are blocks of code that perform specific tasks and can be reused.</p>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Function Definition</h2>
+            <p class="text-gray-300 mt-2">Basic structure of a function:</p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+<?php
+// Function declaration
+function add($a, $b) {
+    return $a + $b;
+}
+
+$result = add(5, 3);
+echo "Sum: " . $result . "\n";
+?></pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Function Components</h2>
+            <ul class="list-disc pl-6 mt-2 text-gray-300">
+                <li><span class="text-yellow-300 font-semibold">Return Type:</span> Data type of the value returned (void if none)</li>
+                <li><span class="text-yellow-300 font-semibold">Function Name:</span> Identifier used to call the function</li>
+                <li><span class="text-yellow-300 font-semibold">Parameters:</span> Variables that receive values passed to the function</li>
+                <li><span class="text-yellow-300 font-semibold">Function Body:</span> Block of code that defines what the function does</li>
+            </ul>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Example Program</h2>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+<?php
+// Function to calculate the square of a number
+function square($num) {
+    return $num * $num;
+}
+
+$number = 4;
+echo "Square of $number is " . square($number) . "\n";
+?></pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
+            <p class="text-gray-300 mt-2">Functions are essential for organizing code, improving readability, and reusability in PHP programming.</p>
+        </div>
+
+        <!-- Arrays Section -->
+        <div id="arrays" class="content-section">
+            <h1 class="text-4xl font-bold text-yellow-400 underline">PHP Arrays</h1>
+            <p class="mt-4 text-gray-300">Arrays in PHP are collections of values stored in a single variable.</p>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Declaring Arrays</h2>
+            <p class="text-gray-300 mt-2">Syntax for array declaration:</p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+$numbers = array(1, 2, 3, 4, 5); <span class="text-gray-300">// Indexed array</span>
+$fruits = ["Apple", "Banana", "Cherry"]; <span class="text-gray-300">// Short array syntax</span>
+$person = ["name" => "John", "age" => 30]; <span class="text-gray-300">// Associative array</span></pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Accessing Array Elements</h2>
+            <p class="text-gray-300 mt-2">Array elements are accessed using their index:</p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+echo $fruits[0]; <span class="text-gray-300">// Outputs: Apple</span>
+echo $person["name"]; <span class="text-gray-300">// Outputs: John</span></pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Multi-dimensional Arrays</h2>
+            <p class="text-gray-300 mt-2">PHP supports arrays of arrays (2D, 3D, etc.):</p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+$matrix = [
+    [1, 2, 3],
+    [4, 5, 6]
+];
+
+echo $matrix[1][2]; <span class="text-gray-300">// Outputs: 6</span></pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
+            <p class="text-gray-300 mt-2">Arrays are fundamental for storing and processing collections of data in PHP.</p>
+        </div>
+
+        <!-- Strings Section -->
+        <div id="strings" class="content-section">
+            <h1 class="text-4xl font-bold text-yellow-400 underline">PHP Strings</h1>
+            <p class="mt-4 text-gray-300">In PHP, strings are sequences of characters.</p>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">String Declaration</h2>
+            <p class="text-gray-300 mt-2">Multiple ways to declare strings:</p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+$str1 = "Hello"; <span class="text-gray-300">// Double quotes</span>
+$str2 = 'World'; <span class="text-gray-300">// Single quotes</span></pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">String Functions</h2>
+            <p class="text-gray-300 mt-2">PHP provides many built-in string functions:</p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+echo strlen($str1); <span class="text-gray-300">// String length</span>
+echo strtoupper($str1); <span class="text-gray-300">// Convert to uppercase</span>
+echo strtolower($str2); <span class="text-gray-300">// Convert to lowercase</span></pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Common String Functions</h2>
+            <ul class="list-disc pl-6 mt-2 text-gray-300">
+                <li><span class="text-yellow-300 font-semibold">strlen():</span> Returns length of string</li>
+                <li><span class="text-yellow-300 font-semibold">strtoupper():</span> Converts to uppercase</li>
+                <li><span class="text-yellow-300 font-semibold">strtolower():</span> Converts to lowercase</li>
+                <li><span class="text-yellow-300 font-semibold">strpos():</span> Finds position of substring</li>
+            </ul>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
+            <p class="text-gray-300 mt-2">Strings are essential for text processing in PHP, and understanding string functions is crucial for effective programming.</p>
+        </div>
+
+        <!-- File Handling Section -->
+        <div id="file-handling" class="content-section">
+            <h1 class="text-4xl font-bold text-yellow-400 underline">PHP File Handling</h1>
+            <p class="mt-4 text-gray-300">File handling in PHP allows you to read from and write to files, enabling data persistence.</p>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">File Operations</h2>
+            <ul class="list-disc pl-6 mt-2 text-gray-300">
+                <li><span class="text-yellow-300 font-semibold">Opening a File:</span> Use fopen() to open a file.</li>
+                <li><span class="text-yellow-300 font-semibold">Reading/Writing:</span> Use functions like fread(), fwrite(), fgets(), and fputs().</li>
+                <li><span class="text-yellow-300 font-semibold">Closing a File:</span> Use fclose() to close a file.</li>
+            </ul>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Example Program</h2>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+<?php
+$file = fopen("example.txt", "w"); <span class="text-gray-300">// Open for writing</span>
+
+if ($file == false) {
+    echo "Error opening file!\n";
+    exit();
+}
+
+fwrite($file, "Hello, File Handling in PHP!\n");
+fclose($file); <span class="text-gray-300">// Close the file</span>
+?></pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Reading from a File</h2>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+<?php
+$file = fopen("example.txt", "r"); <span class="text-gray-300">// Open for reading</span>
+
+if ($file == false) {
+    echo "Error opening file!\n";
+    exit();
+}
+
+while (!feof($file)) {
+    echo fgets($file);
+}
+
+fclose($file); <span class="text-gray-300">// Close the file</span>
+?></pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
+            <p class="text-gray-300 mt-2">File handling is essential for data storage and retrieval in PHP programming.</p>
+        </div>
+
+        <!-- Sessions & Cookies Section -->
+        <div id="sessions" class="content-section">
+            <h1 class="text-4xl font-bold text-yellow-400 underline">PHP Sessions & Cookies</h1>
+            <p class="mt-4 text-gray-300">Sessions and cookies are used to store user data across multiple pages.</p>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Using Sessions</h2>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+<?php
+session_start(); <span class="text-gray-300">// Start the session</span>
+$_SESSION['username'] = 'JohnDoe'; <span class="text-gray-300">// Set session variable</span>
+echo "Session username: " . $_SESSION['username'] . "\n";
+?></pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Using Cookies</h2>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+<?php
+setcookie("user", "JohnDoe", time() + (86400 * 30), "/"); <span class="text-gray-300">// Set a cookie</span>
+if(isset($_COOKIE["user"])) {
+    echo "Cookie user: " . $_COOKIE["user"] . "\n";
+}
+?></pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
+            <p class="text-gray-300 mt-2">Sessions and cookies are essential for maintaining state and user data in web applications.</p>
+        </div>
+
+        <!-- Error Handling Section -->
+        <div id="error-handling" class="content-section">
+            <h1 class="text-4xl font-bold text-yellow-400 underline">PHP Error Handling</h1>
+            <p class="mt-4 text-gray-300">Error handling is crucial for debugging and maintaining code quality.</p>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Error Reporting</h2>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+<?php
+error_reporting(E_ALL); <span class="text-gray-300">// Report all errors</span>
+ini_set('display_errors', 1); <span class="text-gray-300">// Display errors on the screen</span>
+?></pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Custom Error Handling</h2>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+<?php
+function customError($errno, $errstr) {
+    echo "Error: [$errno] $errstr\n";
+}
+
+set_error_handler("customError"); <span class="text-gray-300">// Set custom error handler</span>
+echo $test; <span class="text-gray-300">// Trigger an error</span>
+?></pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
+            <p class="text-gray-300 mt-2">Effective error handling improves the robustness and maintainability of PHP applications.</p>
+        </div>
+
+        <!-- Object-Oriented PHP Section -->
+        <div id="object-oriented" class="content-section">
+            <h1 class="text-4xl font-bold text-yellow-400 underline">Object-Oriented PHP</h1>
+            <p class="mt-4 text-gray-300">Object-oriented programming (OOP) allows for better organization and modularity in code.</p>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Defining a Class</h2>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+<?php
+class Car {
+    public $color;
+    public $model;
+
+    public function __construct($color, $model) {
+        $this->color = $color;
+        $this->model = $model;
+    }
+
+    public function getDetails() {
+        return "Car model: $this->model, Color: $this->color";
+    }
+}
+
+$myCar = new Car("Red", "Toyota");
+echo $myCar->getDetails() . "\n";
+?></pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Inheritance</h2>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+<?php
+class Vehicle {
+    public $brand;
+
+    public function __construct($brand) {
+        $this->brand = $brand;
+    }
+}
+
+class Bike extends Vehicle {
+    public function getBrand() {
+        return "Bike brand: $this->brand";
+    }
+}
+
+$myBike = new Bike("Yamaha");
+echo $myBike->getBrand() . "\n";
+?></pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
+            <p class="text-gray-300 mt-2">Object-oriented programming in PHP enhances code reusability and organization, making it easier to manage complex applications.</p>
+        </div>
+
+        <!-- Database Interaction Section -->
+        <div id="database" class="content-section">
+            <h1 class="text-4xl font-bold text-yellow-400 underline">PHP Database Interaction</h1>
+            <p class="mt-4 text-gray-300">PHP can interact with databases to store and retrieve data, commonly using MySQL.</p>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Connecting to a Database</h2>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+<?php
+$servername = "localhost";
+$username = "username";
+$password = "password";
+$dbname = "myDB";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+echo "Connected successfully\n";
+$conn->close();
+?></pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Performing CRUD Operations</h2>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+<?php
+// Assuming connection is already established
+
+// Create
+$sql = "INSERT INTO Users (username, email) VALUES ('JohnDoe', 'john@example.com')";
+if ($conn->query($sql) === TRUE) {
+    echo "New record created successfully\n";
+}
+
+// Read
+$sql = "SELECT id, username FROM Users";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+        echo "id: " . $row["id"]. " - Name: " . $row["username"]. "\n";
+    }
+}
+
+// Update
+$sql = "UPDATE Users SET email='john.doe@example.com' WHERE username='JohnDoe'";
+if ($conn->query($sql) === TRUE) {
+    echo "Record updated successfully\n";
+}
+
+// Delete
+$sql = "DELETE FROM Users WHERE username='JohnDoe'";
+if ($conn->query($sql) === TRUE) {
+    echo "Record deleted successfully\n";
+}
+$conn->close();
+?></pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
+            <p class="text-gray-300 mt-2">Database interaction is essential for dynamic web applications, allowing for data persistence and retrieval.</p>
+        </div>
+
+        <!-- Security Best Practices Section -->
+        <div id="security" class="content-section">
+            <h1 class="text-4xl font-bold text-yellow-400 underline">PHP Security Best Practices</h1>
+            <p class="mt-4 text-gray-300">Security is crucial in web development to protect applications from vulnerabilities.</p>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Input Validation</h2>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+<?php
+$username = $_POST['username'];
+if (preg_match("/^[a-zA-Z0-9]*$/", $username)) {
+    echo "Valid username\n";
+} else {
+    echo "Invalid username\n";
+}
+?></pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Prepared Statements</h2>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+<?php
+$stmt = $conn->prepare("INSERT INTO Users (username, email) VALUES (?, ?)");
+$stmt->bind_param("ss", $username, $email);
+$username = "JohnDoe";
+$email = "john@example.com";
+$stmt->execute();
+$stmt->close();
+?></pre>
+
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
+            <p class="text-gray-300 mt-2">Implementing security best practices is essential for protecting PHP applications from attacks and vulnerabilities.</p>
+        </div>
+    </div>

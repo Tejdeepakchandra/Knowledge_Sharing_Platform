@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Course</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        html { scroll-behavior: smooth; }
+        body { font-family: Arial, sans-serif; background: #0f3460; color: white; }
+        .sidebar {
+            width: 280px;
+            height: 100vh;
+            position: fixed;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-right: 1px solid rgba(255, 255, 255, 0.2);
+            overflow-y: auto;
+        }
+        .sidebar a { display: block; padding: 10px; margin: 5px 0; color: white; text-decoration: none; border-radius: 5px; transition: all 0.3s ease; cursor: pointer; }
+        .sidebar a:hover, .sidebar a.active { background: rgba(255, 255, 255, 0.2); font-weight: bold; }
+        .content { margin-left: 300px; padding: 20px; }
+        .code-block { background: #1e1e1e; padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; border-left: 5px solid #ffcc00; }
+        .content-section { display: none; }
+        .content-section.active { display: block; }
+    </style>
+    <script>
+        function showContent(sectionId, element) {
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+
+            document.querySelectorAll('.sidebar a').forEach(link => {
+                link.classList.remove('active');
+            });
+            element.classList.add('active');
+        }
+    </script>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <h2 class="text-xl font-bold mb-4"><i class="fas fa-code"></i> HTML Course</h2>
+        <a onclick="showContent('introduction', this)" class="active">Introduction</a>
+        <a onclick="showContent('basics', this)">HTML Basics</a>
+        <a onclick="showContent('elements', this)">HTML Elements</a>
+        <a onclick="showContent('attributes', this)">HTML Attributes</a>
+        <a onclick="showContent('headings', this)">Headings & Paragraphs</a>
+        <a onclick="showContent('styles', this)">Styles & Formatting</a>
+        <a onclick="showContent('links', this)">Links & Images</a>
+        <a onclick="showContent('lists', this)">Lists</a>
+        <a onclick="showContent('tables', this)">Tables</a>
+        <a onclick="showContent('forms', this)">Forms</a>
+        <a onclick="showContent('semantic', this)">Semantic HTML</a>
+        <a onclick="showContent('multimedia', this)">Multimedia</a>
+        <a onclick="showContent('canvas', this)">Canvas & SVG</a>
+        <a onclick="showContent('geolocation', this)">Geolocation</a>
+        <a onclick="showContent('dragdrop', this)">Drag & Drop</a>
+        <a onclick="showContent('webstorage', this)">Web Storage</a>
+        <a onclick="showContent('workers', this)">Web Workers</a>
+        <a onclick="showContent('sse', this)">SSE</a>
+        <a onclick="showContent('examples', this)">HTML Examples</a>
+    </div>
+    
+    <!-- Content Section -->
+    <div class="content">
+        <div id="introduction" class="content-section active">
+            <h1 class="text-4xl font-bold text-yellow-400 underline">Welcome to HTML Course</h1>
+            <p class="mt-4 text-gray-300">
+                This course covers all the essential concepts of HTML, from basic structure to advanced topics like semantic elements, multimedia, and web APIs.
+            </p>
+        
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">What is HTML?</h2>
+            <p class="text-gray-300 mt-2">
+                HTML (HyperText Markup Language) is the <span class="text-yellow-300 font-semibold">standard markup language</span> for creating web pages and web applications. 
+                It describes the <span class="text-yellow-300 font-semibold">structure of web pages</span> using markup and is the backbone of all websites.
+            </p>
+        
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">History of HTML</h2>
+            <p class="text-gray-300 mt-2">
+                HTML was created by <span class="text-yellow-300 font-semibold">Tim Berners-Lee</span> in <span class="text-yellow-300 font-semibold">1991</span> while working at CERN. 
+                Since then, it has evolved through several versions:
+            </p>
+            <ul class="list-disc pl-6 mt-2 text-gray-300">
+                <li><span class="text-yellow-300 font-semibold">HTML 2.0 (1995):</span> First standardized version, providing basic structure and form elements.</li>
+                <li><span class="text-yellow-300 font-semibold">HTML 3.2 (1997):</span> Introduced tables, applets, and text flow, enhancing layout capabilities.</li>
+                <li><span class="text-yellow-300 font-semibold">HTML 4.01 (1999):</span> Major revision with CSS support, allowing for better styling and layout.</li>
+                <li><span class="text-yellow-300 font-semibold">XHTML (2000):</span> XML-based version that enforced stricter syntax rules.</li>
+                <li><span class="text-yellow-300 font-semibold">HTML5 (2014):</span> Current standard with multimedia support, semantic elements, and new APIs for web applications.</li>
+            </ul>
+        
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Key Features of HTML</h2>
+            <ul class="list-disc pl-6 mt-2 text-gray-300">
+                <li><span class="text-yellow-300 font-semibold">Markup Language:</span> Uses tags to define elements, making it easy to structure content.</li>
+                <li><span class="text-yellow-300 font-semibold">Platform Independent:</span> Works across all devices and browsers, ensuring accessibility.</li>
+                <li><span class="text-yellow-300 font-semibold">Easy to Learn:</span> Simple syntax with clear structure, making it beginner-friendly.</li>
+                <li><span class="text-yellow-300 font-semibold">Extensible:</span> Can be combined with CSS for styling and JavaScript for interactivity.</li>
+                <li><span class="text-yellow-300 font-semibold">Semantic:</span> HTML5 introduced meaningful elements that describe the content's purpose.</li>
+                <li><span class="text-yellow-300 font-semibold">Multimedia Support:</span> Native audio and video elements allow for rich media experiences.</li>
+            </ul>
+        
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">How HTML Works?</h2>
+            <ol class="list-decimal pl-6 mt-2 text-gray-300">
+                <li><span class="text-yellow-300 font-semibold">Writing HTML:</span> Developers write HTML code in text editors or IDEs, using tags to structure content.</li>
+                <li><span class="text-yellow-300 font-semibold">Browser Rendering:</span> Web browsers parse HTML and render it visually, converting the markup into a user-friendly interface.</li>
+                <li><span class="text-yellow-300 font-semibold">User  Interaction:</span> Users interact with the rendered page through clicks, form submissions, and navigation.</li>
+            </ol>
+        
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
+            <p class="text-gray-300 mt-2">
+                HTML is the foundation of web development. Understanding HTML is essential for anyone looking to create websites or web applications.
+            </p>
+        </div>
+
+        <div id="basics" class="content-section">
+            <h1 class="text-4xl font-bold text-yellow-400 underline">HTML Basics</h1>
+            <p class="mt-4 text-gray-300">HTML documents are made up of elements that define the structure and content of a web page.</p>
+            
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Basic HTML Document Structure</h2>
+            <p class="text-gray-300 mt-2">A basic HTML document consists of the following structure:</p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+&lt;!DOCTYPE html&gt;  <!-- Declaration of the document type -->
+&lt;html&gt;           <!-- Root element of the HTML document -->
+&lt;head&gt;           <!-- Contains meta-information about the document -->
+    &lt;title&gt;Page Title&lt;/title&gt;  <!-- Title of the document -->
+&lt;/head&gt;
+&lt;body&gt;           <!-- Contains the visible content of the page -->
+    &lt;h1&gt;My First Heading&lt;/h1&gt;  <!-- Main heading -->
+    &lt;p&gt;My first paragraph.&lt;/p&gt;  <!-- A paragraph -->
+&lt;/body&gt;
+&lt;/html&gt;
+            </pre>
+            
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Key Components</h2>
+            <ul class="list-disc pl-6 mt-2 text-gray-300">
+                <li><span class="text-yellow-300 font-semibold">&lt;!DOCTYPE html&gt;:</span> Declares the document type and HTML version, ensuring proper rendering.</li>
+                <li><span class="text-yellow-300 font-semibold">&lt;html&gt;:</span> The root element of an HTML page, containing all other elements.</li>
+                <li><span class="text-yellow-300 font-semibold">&lt;head&gt;:</span> Contains meta information about the document, such as the title and links to stylesheets.</li>
+                <li><span class="text-yellow-300 font-semibold">&lt;title&gt;:</span> Specifies a title for the document, displayed in the browser's title bar or tab.</li>
+                <li><span class="text-yellow-300 font-semibold">&lt;body&gt;:</span> Contains the visible page content, including text, images, and other elements.</li>
+            </ul>
+            
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">HTML Tags</h2>
+            <p class="text-gray-300 mt-2">HTML tags are element names surrounded by angle brackets:</p>
+            <ul class="list-disc pl-6 mt-2 text-gray-300">
+                <li>Tags normally come in pairs like &lt;p&gt; and &lt;/p&gt; (start and end tags).</li>
+                <li>The first tag is the start tag, and the second is the end tag, which closes the element.</li>
+                <li>Some tags are self-closing, like &lt;img&gt; and &lt;br&gt;, meaning they do not require an end tag.</li>
+            </ul>
+        </div>
+
+        <div id="elements" class="content-section">
+            <h1 class="text-4xl font-bold text-yellow-400 underline">HTML Elements</h1>
+            <p class="mt-4 text-gray-300">HTML elements are the building blocks of HTML pages, represented by tags.</p>
+            
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Element Structure</h2>
+            <p class="text-gray-300 mt-2">The basic structure of an HTML element is:</p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+&lt;tagname&gt;Content goes here...&lt;/tagname&gt;  <!-- Opening and closing tags with content -->
+            </pre>
+            
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Common HTML Elements</h2>
+            <ul class="list-disc pl-6 mt-2 text-gray-300">
+                <li><span class="text-yellow-300 font-semibold">&lt;h1&gt; to &lt;h6&gt;:</span> Headings of different levels, with &lt;h1&gt; being the highest and &lt;h6&gt; the lowest.</li>
+                <li><span class="text-yellow-300 font-semibold">&lt;p&gt;:</span> Paragraph element used for blocks of text.</li>
+                <li><span class="text-yellow-300 font-semibold">&lt;a&gt;:</span> Hyperlink element used to link to other pages or resources.</li>
+                <li><span class="text-yellow-300 font-semibold">&lt;img&gt;:</span> Image element used to embed images in a page.</li>
+                <li><span class="text-yellow-300 font-semibold">&lt;div&gt;:</span> Division element used as a container for other elements.</li>
+                <li><span class="text-yellow-300 font-semibold">&lt;span&gt;:</span> Inline container used to group inline elements.</li>
+                <li><span class="text-yellow-300 font-semibold">&lt;ul&gt;, &lt;ol&gt;, &lt;li&gt;:</span> Unordered and ordered lists, with list items.</li>
+                <li><span class="text-yellow-300 font-semibold">&lt;table&gt;, &lt;tr&gt;, &lt;td&gt;:</span> Table elements for displaying tabular data.</li>
+                <li><span class="text-yellow-300 font-semibold">&lt;form&gt;, &lt;input&gt;:</span> Form elements for user input.</li>
+            </ul>
+            
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Nested Elements</h2>
+            <p class="text-gray-300 mt-2">Elements can contain other elements, allowing for complex structures:</p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+&lt;div&gt;  <!-- A division element -->
+    &lt;h1&gt;Title&lt;/h1&gt;  <!-- A heading inside the div -->
+    &lt;p&gt;Paragraph with &lt;strong&gt;bold&lt;/strong&gt; text.&lt;/p&gt;  <!-- A paragraph with nested strong element -->
+&lt;/div&gt;
+            </pre>
+        </div>
+
+        <div id="attributes" class="content-section">
+            <h1 class="text-4xl font-bold text-yellow-400 underline">HTML Attributes</h1>
+            <p class="mt-4 text-gray-300">Attributes provide additional information about HTML elements.</p>
+            
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Attribute Structure</h2>
+            <p class="text-gray-300 mt-2">Attributes are specified in the opening tag of an element:</p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+&lt;tagname attribute="value"&gt;Content&lt;/tagname&gt;  <!-- Example of an element with attributes -->
+            </pre>
+            
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Common Attributes</h2>
+            <ul class="list-disc pl-6 mt-2 text-gray-300">
+                <li><span class="text-yellow-300 font-semibold">id:</span> Specifies a unique id for an element, used for styling and scripting.</li>
+                <li><span class="text-yellow-300 font-semibold">class:</span> Specifies one or more class names for styling with CSS.</li>
+                <li><span class="text-yellow-300 font-semibold">style:</span> Specifies inline CSS styles for an element.</li>
+                <li><span class="text-yellow-300 font-semibold">src:</span> Specifies the source for embedded content, such as images or scripts.</li>
+                <li><span class="text-yellow-300 font-semibold">href:</span> Specifies the URL for links, directing users to other pages.</li>
+                <li><span class="text-yellow-300 font-semibold">alt:</span> Alternative text for images, displayed if the image cannot be loaded.</li>
+                <li><span class="text-yellow-300 font-semibold">width/height:</span> Specifies dimensions for images and other elements.</li>
+            </ul>
+            
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Example</h2>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+&lt;a href="https://www.example.com" target="_blank"&gt;Visit Example&lt;/a&gt;  <!-- Link to an external site -->
+&lt;img src="image.jpg" alt="Description" width="500" height="600"&gt;  <!-- Image with attributes -->
+&lt;p class="intro" id="first-paragraph"&gt;This is a paragraph.&lt;/p&gt;  <!-- Paragraph with class and id attributes -->
+            </pre>
+        </div>
+
+        <div id="headings" class="content-section">
+            <h1 class="text-4xl font-bold text-yellow-400 underline">Headings & Paragraphs</h1>
+            <p class="mt-4 text-gray-300">Headings and paragraphs are fundamental for organizing text content.</p>
+            
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Headings</h2>
+            <p class="text-gray-300 mt-2">HTML has six levels of headings, with &lt;h1&gt; being the most important and &lt;h6&gt; the least:</p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+&lt;h1&gt;Main Heading&lt;/h1&gt;  <!-- Highest level heading -->
+&lt;h2&gt;Subheading&lt;/h2&gt;  <!-- Second level heading -->
+&lt;h3&gt;Sub-subheading&lt;/h3&gt;  <!-- Third level heading -->
+&lt;h4&gt;Level 4 Heading&lt;/h4&gt;  <!-- Fourth level heading -->
+&lt;h5&gt;Level 5 Heading&lt;/h5&gt;  <!-- Fifth level heading -->
+&lt;h6&gt;Level 6 Heading&lt;/h6&gt;  <!-- Lowest level heading -->
+            </pre>
+            
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Paragraphs</h2>
+            <p class="text-gray-300 mt-2">The &lt;p&gt; element defines a paragraph:</p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+&lt;p&gt;This is a paragraph.&lt;/p&gt;  <!-- A simple paragraph -->
+&lt;p&gt;This is another paragraph.&lt;/p&gt;  <!-- Another paragraph -->
+            </pre>
+            
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Line Breaks</h2>
+            <p class="text-gray-300 mt-2">The &lt;br&gt; tag inserts a single line break:</p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+&lt;p&gt;This is&lt;br&gt;a line&lt;br&gt;break example.&lt;/p&gt;  <!-- Paragraph with line breaks -->
+            </pre>
+            
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Horizontal Rule</h2>
+            <p class="text-gray-300 mt-2">The &lt;hr&gt; tag defines a thematic break, often used to separate content:</p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+&lt;p&gt;First section&lt;/p&gt;
+&lt;hr&gt;  <!-- Horizontal line -->
+&lt;p&gt;Second section&lt;/p&gt;
+            </pre>
+        </div>
+
+        <div id="styles" class="content-section">
+            <h1 class="text-4xl font-bold text-yellow-400 underline">Styles & Formatting</h1>
+            <p class="mt-4 text-gray-300">HTML provides elements for styling and formatting text.</p>
+            
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Text Formatting</h2>
+            <ul class="list-disc pl-6 mt-2 text-gray-300">
+                <li><span class="text-yellow-300 font-semibold">&lt;b&gt;:</span> Bold text, used for strong emphasis.</li>
+                <li><span class="text-yellow-300 font-semibold">&lt;strong&gt;:</span> Important text (semantic), typically displayed as bold.</li>
+                <li><span class="text-yellow-300 font-semibold">&lt;i&gt;:</span> Italic text, used for emphasis or titles.</li>
+                <li><span class="text-yellow-300 font-semibold">&lt;em&gt;:</span> Emphasized text (semantic), typically displayed as italic.</li>
+                <li><span class="text-yellow-300 font-semibold">&lt;mark&gt;:</span> Marked/highlighted text, used to highlight parts of the text.</li>
+                <li><span class="text-yellow-300 font-semibold">&lt;small&gt;:</span> Smaller text, often used for fine print.</li>
+                <li><span class="text-yellow-300 font-semibold">&lt;del&gt;:</span> Deleted text, shown with a strikethrough.</li>
+                <li><span class="text-yellow-300 font-semibold">&lt;ins&gt;:</span> Inserted text, shown with an underline.</li>
+                <li><span class="text-yellow-300 font-semibold">&lt;sub&gt;:</span> Subscript text, used for chemical formulas.</li>
+                <li><span class="text-yellow-300 font-semibold">&lt;sup&gt;:</span> Superscript text, used for exponents.</li>
+            </ul>
+            
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Example</h2>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+&lt;p&gt;&lt;b&gt;Bold&lt;/b&gt; and &lt;strong&gt;strong&lt;/strong&gt; text.&lt;/p&gt;
+&lt;p&gt;&lt;i&gt;Italic&lt;/i&gt; and &lt;em&gt;emphasized&lt;/em&gt; text.&lt;/p&gt;
+&lt;p&gt;This is &lt;mark&gt;marked&lt;/mark&gt; text.&lt;/p&gt;
+&lt;p&gt;This is &lt;del&gt;deleted&lt;/del&gt; and &lt;ins&gt;inserted&lt;/ins&gt; text.&lt;/p&gt;
+&lt;p&gt;H&lt;sub&gt;2&lt;/sub&gt;O and x&lt;sup&gt;2&lt;/sup&gt;.&lt;/p&gt;
+            </pre>
+            
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">HTML Styles</h2>
+            <p class="text-gray-300 mt-2">The style attribute allows inline CSS styles to be applied directly to elements:</p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+&lt;p style="color:red;"&gt;This is a red paragraph.&lt;/p&gt;  <!-- Red colored text -->
+&lt;p style="font-family:courier;"&gt;This is courier font.&lt;/p&gt;  <!-- Different font family -->
+&lt;p style="text-align:center;"&gt;Centered paragraph.&lt;/p&gt;  <!-- Centered text -->
+&lt;p style="font-size:50px;"&gt;Big text.&lt;/p&gt;  <!-- Large text size -->
+            </pre>
+        </div>
+
+        <div id="links" class="content-section">
+            <h1 class="text-4xl font-bold text-yellow-400 underline">Links & Images</h1>
+            <p class="mt-4 text-gray-300">Links and images are essential for navigation and content in web pages.</p>
+            
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Creating Links</h2>
+            <p class="text-gray-300 mt-2">Use the &lt;a&gt; tag to create hyperlinks:</p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+&lt;a href="https://www.example.com"&gt;Visit Example&lt;/a&gt;  <!-- Link to an external site -->
+            </pre>
+            <p class="text-gray-300 mt-2">You can also use the <code>target</code> attribute to specify where to open the linked document:</p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+&lt;a href="https://www.example.com" target="_blank"&gt;Open in New Tab&lt;/a&gt;  <!-- Opens link in a new tab -->
+            </pre>
+            
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Images</h2>
+            <p class="text-gray-300 mt-2">Use the &lt;img&gt; tag to embed images in a page:</p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+&lt;img src="image.jpg" alt="Description" width="500" height="600"&gt;  <!-- Image with attributes -->
+            </pre>
+            <p class="text-gray-300 mt-2">The <code>alt</code> attribute provides alternative text for the image, which is important for accessibility.</p>
+        </div>
+
+        <div id="lists" class="content-section">
+            <h1 class="text-4xl font-bold text-yellow-400 underline">Lists</h1>
+            <p class="mt-4 text-gray-300">HTML supports ordered and unordered lists for organizing content.</p>
+            
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Unordered Lists</h2>
+            <p class="text-gray-300 mt-2">Use the &lt;ul&gt; tag to create an unordered list:</p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+&lt;ul&gt;
+    &lt;li&gt;Item 1&lt;/li&gt;  <!-- List item -->
+    &lt;li&gt;Item 2&lt;/li&gt;  <!-- List item -->
+    &lt;li&gt;Item 3&lt;/li&gt;  <!-- List item -->
+&lt;/ul&gt;
+            </pre>
+            
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Ordered Lists</h2>
+            <p class="text-gray-300 mt-2">Use the &lt;ol&gt; tag to create an ordered list:</p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+&lt;ol&gt;
+    &lt;li&gt;First item&lt;/li&gt;  <!-- Ordered list item -->
+    &lt;li&gt;Second item&lt;/li&gt;  <!-- Ordered list item -->
+    &lt;li&gt;Third item&lt;/li&gt;  <!-- Ordered list item -->
+&lt;/ol&gt;
+            </pre>
+        </div>
+
+        <div id="tables" class="content-section">
+            <h1 class="text-4xl font-bold text-yellow-400 underline">Tables</h1>
+            <p class="mt-4 text-gray-300">HTML tables are used to display data in a structured format.</p>
+            
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Table Structure</h2>
+            <p class="text-gray-300 mt-2">A basic table consists of rows and cells:</p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+&lt;table&gt;  <!-- Start of the table -->
+    &lt;tr&gt;  <!-- Table row -->
+        &lt;th&gt;Header 1&lt;/th&gt;  <!-- Table header -->
+        &lt;th&gt;Header 2&lt;/th&gt;  <!-- Table header -->
+    &lt;/tr&gt;
+    &lt;tr&gt;  <!-- Another table row -->
+        &lt;td&gt;Data 1&lt;/td&gt;  <!-- Table data cell -->
+        &lt;td&gt;Data 2&lt;/td&gt;  <!-- Table data cell -->
+    &lt;/tr&gt;
+&lt;/table&gt;  <!-- End of the table -->
+            </pre>
+            <p class="text-gray-300 mt-2">You can also use the <code>colspan</code> and <code>rowspan</code> attributes to merge cells:</p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+&lt;tr&gt;
+    &lt;td colspan="2"&gt;Merged Cell&lt;/td&gt;  <!-- Merged cell -->
+&lt;/tr&gt;
+            </pre>
+        </div>
+
+        <div id="forms" class="content-section">
+            <h1 class="text-4xl font-bold text-yellow-400 underline">Forms</h1>
+            <p class="mt-4 text-gray-300">HTML forms are used to collect user input.</p>
+            
+            <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Form Structure</h2>
+            <p class="text-gray-300 mt-2">A basic form consists of various input elements:</p>
+            <pre class="bg-gray-800 p-4 rounded-lg text-white">
+&lt;form action="/submit" method="post"&gt;  <!-- Form element -->
+    &lt;label for="name"&gt;Name:&lt;/label&gt;  <!-- Label for input -->
+    &lt;input type="text" id="name" name="name" required&gt;  <!-- Text input -->
+    &lt;input type="submit" value="Submit"&gt;  <!-- Submit button -->
+&lt;/form&gt;
+            </pre>
+            <p class="text-gray-300 mt-2">Forms can include various input types, such as:</p>
+            <ul class="list-disc pl-6 mt-2 text-gray-300">
+                <li><span class="text-yellow-300 font-semibold">&lt;input type="text"&gt;:</span> For single-line text input.</li>
+                <li><span class="text-yellow-300 font-semibold">&lt;input type="email"&gt;:</span> For email input, with validation.</li>
+                <li><span class="text-yellow-300 font-semibold">&lt;input type="password"&gt;:</span> For password input, obscured text.</li>
+                <li><span class="text-yellow-300 font-semibold">&lt;input type="radio"&gt;:</span> For selecting one option from a set.</li>
+                <li><span class="text-yellow-300 font-semibold">&lt;input type="checkbox"&gt;:</span> For selecting multiple options.</li>
+                <li><span class="text-yellow-300 font-semibold">&lt;select&gt;:</span> For dropdown lists.</li>
+                <li><span class="text-yellow-300 font-semibold">&lt;textarea&gt;:</span> For multi-line text input.</li>
+            </ul>
+        </div>
+
+        <div id="semantic" class="content-section">
+            <h1 class="text-4xl font-bold text-yellow-400 underline">
+                <h1 class="text-4xl font-bold text-yellow-400 underline">Semantic HTML</h1>
+                <p class="mt-4 text-gray-300">Semantic HTML uses HTML markup to reinforce the meaning of the content.</p>
+                
+                <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Semantic Elements</h2>
+                <p class="text-gray-300 mt-2">Semantic elements clearly describe their meaning to both the browser and the developer. Examples include:</p>
+                <ul class="list-disc pl-6 mt-2 text-gray-300">
+                    <li><span class="text-yellow-300 font-semibold">&lt;header&gt;:</span> Represents introductory content, typically a group of introductory or navigational aids.</li>
+                    <li><span class="text-yellow-300 font-semibold">&lt;nav&gt;:</span> Contains navigation links for the document.</li>
+                    <li><span class="text-yellow-300 font-semibold">&lt;article&gt;:</span> Represents a self-contained piece of content that could be distributed independently.</li>
+                    <li><span class="text-yellow-300 font-semibold">&lt;section&gt;:</span> Represents a thematic grouping of content, typically with a heading.</li>
+                    <li><span class="text-yellow-300 font-semibold">&lt;footer&gt;:</span> Represents the footer for its nearest sectioning content or sectioning root element.</li>
+                    <li><span class="text-yellow-300 font-semibold">&lt;aside&gt;:</span> Represents content that is tangentially related to the content around it, often used for sidebars.</li>
+                    <li><span class="text-yellow-300 font-semibold">&lt;figure&gt;:</span> Represents self-contained content, like illustrations, diagrams, or photos.</li>
+                    <li><span class="text-yellow-300 font-semibold">&lt;figcaption&gt;:</span> Represents a caption or legend for a &lt;figure&gt; element.</li>
+                </ul>
+                <p class="text-gray-300 mt-2">Using semantic HTML improves accessibility and SEO, as search engines can better understand the content structure.</p>
+            </div>
+    
+            <div id="multimedia" class="content-section">
+                <h1 class="text-4xl font-bold text-yellow-400 underline">Multimedia</h1>
+                <p class="mt-4 text-gray-300">HTML5 introduced native support for audio and video, allowing for rich media experiences without the need for plugins.</p>
+                
+                <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Audio Example</h2>
+                <p class="text-gray-300 mt-2">To embed audio, use the &lt;audio&gt; tag:</p>
+                <pre class="bg-gray-800 p-4 rounded-lg text-white">
+    &lt;audio controls&gt;  <!-- Controls attribute adds play, pause, and volume controls -->
+        &lt;source src="audio.mp3" type="audio/mpeg"&gt;  <!-- Source of the audio file -->
+        Your browser does not support the audio tag.  <!-- Fallback content -->
+    &lt;/audio&gt;
+                </pre>
+                <p class="text-gray-300 mt-2">The <code>controls</code> attribute adds playback controls, and you can specify multiple sources for different formats.</p>
+                
+                <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Video Example</h2>
+                <p class="text-gray-300 mt-2">To embed video, use the &lt;video&gt; tag:</p>
+                <pre class="bg-gray-800 p-4 rounded-lg text-white">
+    &lt;video width="320" height="240" controls&gt;  <!-- Width and height attributes -->
+        &lt;source src="movie.mp4" type="video/mp4"&gt;  <!-- Source of the video file -->
+        Your browser does not support the video tag.  <!-- Fallback content -->
+    &lt;/video&gt;
+                </pre>
+                <p class="text-gray-300 mt-2">You can also use attributes like <code>autoplay</code>, <code>loop</code>, and <code>muted</code> to control playback behavior.</p>
+            </div>
+    
+            <div id="canvas" class="content-section">
+                <h1 class="text-4xl font-bold text-yellow-400 underline">Canvas & SVG</h1>
+                <p class="mt-4 text-gray-300">HTML5 introduced the &lt;canvas&gt; element for drawing graphics on the fly via JavaScript.</p>
+                
+                <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Canvas Example</h2>
+                <p class="text-gray-300 mt-2">To create a canvas, use the &lt;canvas&gt; tag:</p>
+                <pre class="bg-gray-800 p-4 rounded-lg text-white">
+    &lt;canvas id="myCanvas" width="200" height="100"&gt;&lt;/canvas&gt;  <!-- Canvas element -->
+    &lt;script&gt;
+    var canvas = document.getElementById("myCanvas");  // Get the canvas element
+    var ctx = canvas.getContext("2d");  // Get the 2D drawing context
+    ctx.fillStyle = "red";  // Set fill color
+    ctx.fillRect(0, 0, 150, 75);  // Draw a filled rectangle
+    &lt;/script&gt;
+                </pre>
+                <p class="text-gray-300 mt-2">The <code>getContext("2d")</code> method is used to obtain a drawing context for 2D rendering.</p>
+                
+                <h2 class="text-2xl font-bold text-blue-400 underline mt-6">SVG Example</h2>
+                <p class="text-gray-300 mt-2">Scalable Vector Graphics (SVG) is another way to create graphics:</p>
+                <pre class="bg-gray-800 p-4 rounded-lg text-white">
+    &lt;svg width="100" height="100"&gt;  <!-- SVG element -->
+        &lt;circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" /&gt;  <!-- Circle element -->
+    &lt;/svg&gt;
+                </pre>
+                <p class="text-gray-300 mt-2">SVG graphics are resolution-independent and can be scaled without losing quality.</p>
+            </div>
+    
+            <div id="geolocation" class="content-section">
+                <h1 class="text-4xl font-bold text-yellow-400 underline">Geolocation</h1>
+                <p class="mt-4 text-gray-300">The Geolocation API allows the user to share their location with web applications.</p>
+                
+                <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Geolocation Example</h2>
+                <p class="text-gray-300 mt-2">To get the user's current position, use the following code:</p>
+                <pre class="bg-gray-800 p-4 rounded-lg text-white">
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            alert("Latitude: " + position.coords.latitude + 
+                  ", Longitude: " + position.coords.longitude);  // Display coordinates
+        });
+    } else {
+        alert("Geolocation is not supported by this browser.");  // Fallback for unsupported browsers
+    }
+                </pre>
+                <p class="text-gray-300 mt-2">This code checks if geolocation is supported and retrieves the user's current latitude and longitude.</p>
+            </div>
+    
+            <div id="dragdrop" class="content-section">
+                <h1 class="text-4xl font-bold text-yellow-400 underline">Drag & Drop</h1>
+                <p class="mt-4 text-gray-300">HTML5 provides a drag-and-drop API that allows users to drag elements and drop them in different locations.</p>
+                
+                <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Drag & Drop Example</h2>
+                <p class="text-gray-300 mt-2">Here’s a simple example of drag-and-drop functionality:</p>
+                <pre class="bg-gray-800 p-4 rounded-lg text-white">
+    &lt;div id="drag1" draggable="true" ondragstart="drag(event)"&gt;Drag me!&lt;/div&gt;  <!-- Draggable element -->
+    &lt;div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"&gt;Drop here&lt;/div&gt;  <!-- Drop target -->
+    
+    &lt;script&gt;
+    function allowDrop(ev) {
+        ev.preventDefault();  // Prevent default behavior to allow drop
+    }
+    function drag(ev) {
+        ev.dataTransfer.setData("text", ev.target.id);  // Store the id of the dragged element
+    }
+    function drop(ev) {
+        ev.preventDefault();  // Prevent default behavior
+        var data = ev.dataTransfer.getData("text");  // Get the id of the dragged element
+        ev.target.appendChild(document.getElementById(data));  // Append the dragged element to the drop target
+    }
+    &lt;/script&gt;
+                </pre>
+                <p class="text-gray-300 mt-2">This example demonstrates how to make an element draggable and how to handle the drop event.</p>
+            </div>
+    
+            <div id="webstorage" class="content-section">
+                <h1 class="text-4xl font-bold text-yellow-400 underline">Web Storage</h1>
+                <p class="mt-4 text-gray-300">Web Storage provides storage that is accessible within the user's browser, allowing for persistent data storage.</p>
+                
+                <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Local Storage Example</h2>
+                <p class="text-gray-300 mt-2">Local storage allows you to store data with no expiration date:</p>
+                <pre class="bg-gray-800 p-4 rounded-lg text-white">
+    localStorage.setItem("name", "John Doe");  // Store data
+    var name = localStorage.getItem("name");  // Retrieve data
+    alert(name);  // Display the stored name
+                </pre>
+                <p class="text-gray-300 mt-2">Data stored in local storage persists even after the browser is closed and reopened.</p>
+                
+                <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Session Storage Example</h2>
+                <p class="text-gray-300 mt-2">Session storage is similar to local storage, but data is cleared when the page session ends:</p>
+                <pre class="bg-gray-800 p-4 rounded-lg text-white">
+    sessionStorage.setItem("sessionName", "Jane Doe");  // Store data for the session
+    var sessionName = sessionStorage.getItem("sessionName");  // Retrieve session data
+    alert(sessionName);  // Display the stored session name
+                </pre>
+            </div>
+    
+            <div id="workers" class="content-section">
+                <h1 class="text-4xl font-bold text-yellow-400 underline">Web Workers</h1>
+                <p class="mt-4 text-gray-300">Web Workers allow for background scripts to run in parallel to the main thread, improving performance for complex tasks.</p>
+                
+                <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Web Worker Example</h2>
+                <p class="text-gray-300 mt-2">To create a web worker, you need a separate JavaScript file:</p>
+                <pre class="bg-gray-800 p-4 rounded-lg text-white">
+    // worker.js
+    self.onmessage = function(event) {
+        var result = event.data * 2;  // Perform a calculation
+        self.postMessage(result);  // Send the result back to the main thread
+    }
+                </pre>
+                <p class="text-gray-300 mt-2">In your main script, you can create and communicate with the worker:</p>
+                <pre class="bg-gray-800 p-4 rounded-lg text-white">
+    var worker = new Worker("worker.js");  // Create a new worker
+    worker.onmessage = function(event) {
+        console.log("Result from worker: " + event.data);  // Handle the result
+    };
+    worker.postMessage(10);  // Send data to the worker
+                </pre>
+            </div>
+    
+            <div id="sse" class="content-section">
+                <h1 class="text-4xl font-bold text-yellow-400 underline">Server-Sent Events (SSE)</h1>
+                <p class="mt-4 text-gray-300">SSE allows a server to push updates to the client, enabling real-time updates.</p>
+                
+                <h2 class="text-2xl font-bold text-blue-400 underline mt-6">SSE Example</h2>
+                <p class="text-gray-300 mt-2">To use SSE, you need to set up a server endpoint that sends events:</p>
+                <pre class="bg-gray-800 p-4 rounded-lg text-white">
+    var eventSource = new EventSource("events.php");  // Create a new EventSource
+    eventSource.onmessage = function(event) {
+        console.log("New message: " + event.data);  // Handle incoming messages
+    };
+                </pre>
+                <p class="text-gray-300 mt-2">The server should send data in the following format:</p>
+                <pre class="bg-gray-800 p-4 rounded-lg text-white">
+    data: Your message here\n\n  // Format for sending data
+                </pre>
+            </div>
+    
+            <div id="examples" class="content-section">
+                <h1 class="text-4xl font-bold text-yellow-400 underline">HTML Examples</h1>
+                <p class="mt-4 text-gray-300">Here are some complete HTML examples demonstrating various concepts.</p>
+                
+                <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Basic Page Example</h2>
+                <pre class="bg-gray-800 p-4 rounded-lg text-white">
+    &lt;!DOCTYPE html&gt;
+    &lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;My First Web Page&lt;/title&gt;
+        &lt;style&gt;
+            body { font-family: Arial, sans-serif; }
+            header { background: #333; color: white; padding: 20px; }
+            nav a { color: white; margin-right: 15px; }
+            section { padding: 20px; }
+            footer { background: #333; color: white; text-align: center; padding: 10px; }
+        &lt;/style&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;header&gt;
+            &lt;h1&gt;My Website&lt;/h1&gt;
+            &lt;nav&gt;
+                &lt;a href="#home"&gt;Home&lt;/a&gt;
+                &lt;a href="#about"&gt;About&lt;/a&gt;
+                &lt;a href="#contact"&gt;Contact&lt;/a&gt;
+            &lt;/nav&gt;
+        &lt;/header&gt;
+        
+        &lt;section id="home"&gt;
+            &lt;h2&gt;Welcome&lt;/h2&gt;
+            &lt;p&gt;This is my first web page.&lt;/p&gt;
+            &lt;img src="welcome.jpg" alt="Welcome image" width="400"&gt;
+        &lt;/section&gt;
+        
+        &lt;footer&gt;
+            &lt;p&gt;&copy; 2023 My Website&lt;/p&gt;
+        &lt;/footer&gt;
+    &lt;/body&gt;
+    &lt;/html&gt;
+                </pre>
+                
+                <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Form Example</h2>
+                <pre class="bg-gray-800 p-4 rounded-lg text-white">
+    &lt;form action="/submit" method="post"&gt;
+        &lt;fieldset&gt;
+            &lt;legend&gt;Personal Information&lt;/legend&gt;
+            &lt;label for="name"&gt;Name:&lt;/label&gt;
+            &lt;input type="text" id="name" name="name" required&gt;&lt;br&gt;
+            
+            &lt;label for="email"&gt;Email:&lt;/label&gt;
+            &lt;input type="email" id="email" name="email" required&gt;&lt;br&gt;
+            
+            &lt;label for="password"&gt;Password:&lt;/label&gt;
+            &lt;input type="password" id="password" name="password" required&gt;&lt;br&gt;
+            
+            &lt;label&gt;Gender:&lt;/label&gt;
+            &lt;input type="radio" id="male" name="gender" value="male"&gt;
+            &lt;label for="male"&gt;Male&lt;/label&gt;
+            &lt;input type="radio" id="female" name="gender" value="female"&gt;
+            &lt;label for="female"&gt;Female&lt;/label&gt;&lt;br&gt;
+            
+            &lt;label for="country"&gt;Country:&lt;/label&gt;
+            &lt;select id="country" name="country"&gt;
+                &lt;option value="usa"&gt;USA&lt;/option&gt;
+                &lt;option value="canada"&gt;Canada&lt;/option&gt;
+                &lt;option value="uk"&gt;UK&lt;/option&gt;
+            &lt;/select&gt;&lt;br&gt;
+            
+            &lt;label for="message"&gt;Message:&lt;/label&gt;&lt;br&gt;
+            &lt;textarea id="message" name="message" rows="4" cols="50"&gt;&lt;/textarea&gt;&lt;br&gt;
+            
+            &lt;input type="checkbox" id="subscribe" name="subscribe"&gt;
+            &lt;label for="subscribe"&gt;Subscribe to newsletter&lt;/label&gt;&lt;br&gt;
+            
+            &lt;button type="submit"&gt;Submit&lt;/button&gt;
+        &lt;/fieldset&gt;
+    &lt;/form&gt;
+                </pre>
+            </div>
+        </div>
+    </body>
+    </html>

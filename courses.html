@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses - DevAwakening</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            color: white;
+            background: linear-gradient(-45deg, #16213e, #1a1a2e, #0f3460, #16213e);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .course-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            border-color: rgba(255, 193, 7, 0.5);
+        }
+        .course-header {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .course-body {
+            padding: 20px;
+        }
+        .course-footer {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .badge-new {
+            background-color: #4CAF50;
+        }
+        .badge-popular {
+            background-color: #FF9800;
+        }
+        .nav-tabs {
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        .nav-tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .nav-tab:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-bottom-color: rgba(255, 193, 7, 0.5);
+        }
+        .nav-tab.active {
+            border-bottom-color: #FFC107;
+            font-weight: bold;
+        }
+        .language-icon {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Navigation Bar -->
+    <nav class="w-full bg-[#1a1a2e] p-4 shadow-md flex justify-between items-center fixed top-0 left-0 right-0 z-50 text-white">
+        <h1 class="text-xl font-bold">DevAwakening</h1>
+        <ul class="flex space-x-6 text-lg">
+            <li><a href="ex4.html" class="hover:text-yellow-400">Home</a></li>
+            <li><a href="selectedjava.html" class="hover:text-yellow-400">Java</a></li>
+            <li><a href="selectedC.html" class="hover:text-yellow-400">C</a></li>
+            <li><a href="selectedpython.html" class="hover:text-yellow-400">Python</a></li>
+            <li><a href="selectedhtml.html" class="hover:text-yellow-400">HTML & CSS</a></li>
+            <li><a href="selectedphp.html" class="hover:text-yellow-400">PHP</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 pt-32 pb-16">
+        <!-- Page Header -->
+        <header class="text-center mb-12">
+            <h1 class="text-4xl font-bold mb-4">CodeBook Courses</h1>
+            <p class="text-xl text-gray-300 max-w-2xl mx-auto">Choose your programming language and start your coding journey today with our interactive courses.</p>
+        </header>
+
+        <!-- Course Filter Tabs -->
+        <div class="nav-tabs flex mb-8 overflow-x-auto">
+            <div class="nav-tab active" data-filter="all">All Courses</div>
+            <div class="nav-tab" data-filter="beginner">Beginner</div>
+            <div class="nav-tab" data-filter="intermediate">Intermediate</div>
+            <div class="nav-tab" data-filter="advanced">Advanced</div>
+        </div>
+
+        <!-- Courses Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Java Course Card -->
+            <div class="course-card" id="java" data-level="beginner">
+                <div class="course-header flex justify-between items-center">
+                    <h2 class="text-xl font-bold flex items-center">
+                        <img src="https://cdn-icons-png.flaticon.com/512/226/226777.png" alt="Java" class="language-icon">
+                        Java Programming
+                    </h2>
+                    <span class="badge badge-popular">Popular</span>
+                </div>
+                <div class="course-body">
+                    <p class="mb-4">Master Java from basics to advanced concepts including OOP, data structures, and algorithms.</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-3 py-1 bg-gray-700 rounded-full text-sm">OOP</span>
+                        <span class="px-3 py-1 bg-gray-700 rounded-full text-sm">Collections</span>
+                        <span class="px-3 py-1 bg-gray-700 rounded-full text-sm">Multithreading</span>
+                    </div>
+                </div>
+                <div class="course-footer flex justify-between items-center">
+                    <div class="text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span class="ml-2">4.7</span>
+                    </div>
+                    <a href="selectedjava.html" class="px-4 py-2 bg-yellow-500 hover:bg-yellow-600 rounded transition">Start Learning</a>
+                </div>
+            </div>
+
+            <!-- C Course Card -->
+            <div class="course-card" id="c" data-level="beginner">
+                <div class="course-header flex justify-between items-center">
+                    <h2 class="text-xl font-bold flex items-center">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3665/3665923.png" alt="C" class="language-icon">
+                        C Fundamentals
+                    </h2>
+                    <span class="badge badge-new">New</span>
+                </div>
+                <div class="course-body">
+                    <p class="mb-4">Learn core C programming including pointers, memory management, and data structures.</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-3 py-1 bg-gray-700 rounded-full text-sm">Pointers</span>
+                        <span class="px-3 py-1 bg-gray-700 rounded-full text-sm">Memory</span>
+                        <span class="px-3 py-1 bg-gray-700 rounded-full text-sm">Algorithms</span>
+                    </div>
+                </div>
+                <div class="course-footer flex justify-between items-center">
+                    <div class="text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <span class="ml-2">4.2</span>
+                    </div>
+                    <a href="selectedc.html" class="px-4 py-2 bg-yellow-500 hover:bg-yellow-600 rounded transition">Start Learning</a>
+                </div>
+            </div>
+
+            <!-- Python Course Card -->
+            <div class="course-card" id="python" data-level="beginner">
+                <div class="course-header flex justify-between items-center">
+                    <h2 class="text-xl font-bold flex items-center">
+                        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968350.png" alt="Python" class="language-icon">
+                        Python Programming
+                    </h2>
+                </div>
+                <div class="course-body">
+                    <p class="mb-4">Learn Python from basics to advanced topics including web development and data science.</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-3 py-1 bg-gray-700 rounded-full text-sm">Web Dev</span>
+                        <span class="px-3 py-1 bg-gray-700 rounded-full text-sm">Data Science</span>
+                        <span class="px-3 py-1 bg-gray-700 rounded-full text-sm">Automation</span>
+                    </div>
+                </div>
+                <div class="course-footer flex justify-between items-center">
+                    <div class="text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <span class="ml-2">4.9</span>
+                    </div>
+                    <a href="selectedpython.html" class="px-4 py-2 bg-yellow-500 hover:bg-yellow-600 rounded transition">Start Learning</a>
+                </div>
+            </div>
+
+            <!-- HTML & CSS Course Card -->
+            <div class="course-card" id="html-css" data-level="beginner">
+                <div class="course-header flex justify-between items-center">
+                    <h2 class="text-xl font-bold flex items-center">
+                        <img src="https://cdn-icons-png.flaticon.com/512/732/732212.png" alt="HTML" class="language-icon">
+                        HTML & CSS Basics
+                    </h2>
+                    <span class="badge badge-popular">Popular</span>
+                </div>
+                <div class="course-body">
+                    <p class="mb-4">Build beautiful, responsive websites with modern HTML5 and CSS3 techniques.</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-3 py-1 bg-gray-700 rounded-full text-sm">Flexbox</span>
+                        <span class="px-3 py-1 bg-gray-700 rounded-full text-sm">Grid</span>
+                        <span class="px-3 py-1 bg-gray-700 rounded-full text-sm">Animations</span>
+                    </div>
+                </div>
+                <div class="course-footer flex justify-between items-center">
+                    <div class="text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span class="ml-2">4.6</span>
+                    </div>
+                    <a href="selectedhtml.html" class="px-4 py-2 bg-yellow-500 hover:bg-yellow-600 rounded transition">Start Learning</a>
+                </div>
+            </div>
+
+            <!-- PHP Course Card -->
+            <div class="course-card" id="php" data-level="intermediate">
+                <div class="course-header flex justify-between items-center">
+                    <h2 class="text-xl font-bold flex items-center">
+                        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968332.png" alt="PHP" class="language-icon">
+                        PHP Development
+                    </h2>
+                </div>
+                <div class="course-body">
+                    <p class="mb-4">Create dynamic web applications with PHP, MySQL, and modern frameworks like Laravel.</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-3 py-1 bg-gray-700 rounded-full text-sm">MySQL</span>
+                        <span class="px-3 py-1 bg-gray-700 rounded-full text-sm">Laravel</span>
+                        <span class="px-3 py-1 bg-gray-700 rounded-full text-sm">APIs</span>
+                    </div>
+                </div>
+                <div class="course-footer flex justify-between items-center">
+                    <div class="text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <span class="ml-2">4.3</span>
+                    </div>
+                    <a href="selectedphp.html" class="px-4 py-2 bg-yellow-500 hover:bg-yellow-600 rounded transition">Start Learning</a>
+                </div>
+            </div>
+
+            <!-- Coming Soon Card -->
+            <div class="course-card opacity-80">
+                <div class="course-header">
+                    <h2 class="text-xl font-bold flex items-center">
+                        <i class="fas fa-plus-circle text-3xl mr-4 text-gray-400"></i>
+                        More Coming Soon
+                    </h2>
+                </div>
+                <div class="course-body">
+                    <p class="mb-4">We're constantly adding new courses. Stay tuned for JavaScript, React, and more!</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-3 py-1 bg-gray-700 rounded-full text-sm">JavaScript</span>
+                        <span class="px-3 py-1 bg-gray-700 rounded-full text-sm">React</span>
+                        <span class="px-3 py-1 bg-gray-700 rounded-full text-sm">Node.js</span>
+                    </div>
+                </div>
+                <div class="course-footer">
+                    <button class="w-full py-2 bg-gray-600 rounded cursor-not-allowed" disabled>Coming Soon</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Tab filtering functionality
+        const tabs = document.querySelectorAll('.nav-tab');
+        const courses = document.querySelectorAll('.course-card:not(.opacity-80)');
+        
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Update active tab
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                const filter = tab.dataset.filter;
+                
+                // Filter courses
+                courses.forEach(course => {
+                    if (filter === 'all' || course.dataset.level === filter) {
+                        course.style.display = 'block';
+                    } else {
+                        course.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
