@@ -300,7 +300,7 @@ try {
             <?php echo SITE_NAME; ?>
         </h1>
         <ul class="hidden md:flex space-x-4 text-sm">
-            <li><a href="final.html" class="hover:text-yellow-400 transition">Home</a></li>
+            <li><a href="ex4.html" class="hover:text-yellow-400 transition">Home</a></li>
             <li><a href="courses.html" class="hover:text-yellow-400 transition">Courses</a></li>
             <li><a href="logout.php" class="px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600 transition">Logout</a></li>
         </ul>
@@ -330,7 +330,7 @@ try {
         <!-- Header -->
         <div class="dark-box p-6 mb-6 fade-in">
             <h2 class="text-2xl font-bold mb-2">Developer Q&A</h2>
-            <p class="text-sm text-gray-300">Ask questions and help others in the <?php echo SITE_NAME; ?> community</p>
+            <p class="text-sm text-gray-300">Ask questions and help others in the CODEBOOK-<?php echo SITE_NAME; ?> community</p>
         </div>
 
         <!-- Question Form -->
