@@ -26,6 +26,7 @@
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
+
         }
         
         .fade-in {
@@ -81,7 +82,7 @@
         
         .course-img {
             width: 100%;
-            height: 180px;
+            height: 160px;
             object-fit: cover;
             border-radius: 15px;
             margin-bottom: 20px;
@@ -504,11 +505,11 @@
                 <!-- Java Course -->
                 <div class="carousel-item">
                     <div class="course-card">
-                        <img src="https://images.unsplash.com/photo-1580894732444-8ecded7900cd?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Java Programming" class="course-img">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/3/30/Java_programming_language_logo.svg" alt="Java Programming" class="course-img">
                         <div class="flex flex-col h-full">
                             <h4 class="course-title text-2xl font-bold mb-2">Java Mastery</h4>
                             <p class="course-desc mb-4">From basics to advanced concepts including Spring Boot, Hibernate, and microservices architecture.</p>
-                            <button class="course-btn mt-auto bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-6 rounded-full transition duration-300" onclick="location.href='courses.html#python'">
+                            <button class="course-btn mt-auto bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-6 rounded-full transition duration-300" onclick="location.href='selectedjava.html'">
                                 <i class="fas fa-arrow-right mr-2"></i> Start Course
                         
                             </button>
@@ -519,11 +520,11 @@
                 <!-- C++ Course -->
                 <div class="carousel-item">
                     <div class="course-card">
-                        <img src="https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="C++ Programming" class="course-img">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/C_Logo.png" alt="C++ Programming" class="course-img">
                         <div class="flex flex-col h-full">
-                            <h4 class="course-title text-2xl font-bold mb-2">C++ Excellence</h4>
-                            <p class="course-desc mb-4">Master core concepts, memory management, STL, and modern C++ features (C++11/14/17).</p>
-                            <button class="course-btn mt-auto bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-6 rounded-full transition duration-300" onclick="location.href='courses.html#python'">
+                            <h4 class="course-title text-2xl font-bold mb-2">C Excellence</h4>
+                            <p class="course-desc mb-4">Master core concepts, memory management, STL, and modern C features (C11/14/17).</p>
+                            <button class="course-btn mt-auto bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-6 rounded-full transition duration-300" onclick="location.href='selectedC.html'">
                                 <i class="fas fa-arrow-right mr-2"></i> Start Course
                                 
                             </button>
@@ -534,12 +535,12 @@
                 <!-- Python Course -->
                 <div class="carousel-item">
                     <div class="course-card">
-                        <img src="https://images.unsplash.com/photo-1526379095098-d400fd0bf935?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Python Programming" class="course-img">
+                        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968350.png" alt="Python Logo" alt="Python Programming" class="course-img">
                         <div class="flex flex-col h-full">
                             <i class="fab fa-python course-icon"></i>
                             <h4 class="course-title">Python Power</h4>
-                            <p class="course-desc">From fundamentals to Django/Flask web development, data science, and automation.</p>
-                            <button class="course-btn" onclick="location.href='courses.html#python'">
+                            <p class="course-desc">From fundamentals to Django/Flask web development, data science.</p>
+                            <button class="course-btn" onclick="location.href='selectedpython.html'">
                                 <i class="fas fa-arrow-right mr-2"></i> Start Course
                             </button>
                         </div>
@@ -554,7 +555,7 @@
                             <i class="fas fa-laptop-code course-icon"></i>
                             <h4 class="course-title">Fullstack Web</h4>
                             <p class="course-desc">Master HTML, CSS, JavaScript, React, Node.js and build complete web applications.</p>
-                            <button class="course-btn" onclick="location.href='courses.html#web-dev'">
+                            <button class="course-btn" onclick="location.href='selectedhtml.html'">
                                 <i class="fas fa-arrow-right mr-2"></i> Start Course
                             </button>
                         </div>
@@ -564,11 +565,11 @@
                 <!-- PHP Course -->
                 <div class="carousel-item">
                     <div class="course-card">
-                        <img src="https://images.unsplash.com/photo-1607252650355-f7fd0460ccdb?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="PHP Development" class="course-img">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/27/PHP-logo.svg" alt="PHP Development" class="course-img">
                         <div class="flex flex-col h-full">
                             <h4 class="course-title text-2xl font-bold mb-2">PHP Professional</h4>
                             <p class="course-desc mb-4">Build dynamic websites with PHP, MySQL, Laravel and modern backend techniques.</p>
-                            <button class="course-btn mt-auto bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-6 rounded-full transition duration-300" onclick="location.href='courses.html#selectedphp.html'">
+                            <button class="course-btn mt-auto bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-6 rounded-full transition duration-300" onclick="location.href='selectedphp.html'">
                                 <i class="fas fa-arrow-right mr-2"></i> Start Course
                                 
                             </button>
@@ -671,7 +672,7 @@
                         <i class="fas fa-phone-alt text-yellow-500 text-2xl mr-4"></i>
                         <div>
                             <h5 class="font-semibold">Call Us</h5>
-                            <a href="tel:+11234567890" class="text-gray-300 hover:text-yellow-400">+1 (123) 456-7890</a>
+                            <a href="tel:+11234567890" class="text-gray-300 hover:text-yellow-400">+91 (123) 456-7890</a>
                         </div>
                     </div>
                 </div>
@@ -680,7 +681,7 @@
                         <i class="fas fa-map-marker-alt text-yellow-500 text-2xl mr-4"></i>
                         <div>
                             <h5 class="font-semibold">Visit Us</h5>
-                            <p class="text-gray-300">123 Developer Lane, Tech City, TC 10101</p>
+                            <p class="text-gray-300">Benz circle, Vijayawada City, AP 502055</p>
                         </div>
                     </div>
                 </div>
