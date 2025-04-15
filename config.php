@@ -1,8 +1,8 @@
 <?php
 $host = "localhost";
 $dbname = "devawakening";
-$username = "root"; // Replace with your MySQL username
-$password = ""; // Replace with your MySQL password
+$username = "root"; 
+$password = ""; 
 
 try {
     $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
