@@ -5,6 +5,15 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        :root {
+    --primary: #2563eb;
+    --secondary: #1e40af;
+    --accent: #f59e0b;
+    --dark: #0f172a;
+    --light: #f8fafc;
+    --success: #10b981;
+    --danger: #ef4444;
+}
         html { scroll-behavior: smooth; }
         body { font-family: Arial, sans-serif; background: #0f3460; color: white; }
         .sidebar {
@@ -23,7 +32,99 @@
         .code-block { background: #1e1e1e; padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; border-left: 5px solid #ffcc00; }
         .content-section { display: none; }
         .content-section.active { display: block; }
+        /* Test-specific styles */
+#test-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: rgba(15, 23, 42, 0.7);
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+#result-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    background: rgba(15, 23, 42, 0.7);
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    animation: slideUp 0.4s ease;
+}
+
+.option-label {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    background: rgba(30, 41, 59, 0.7);
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+}
+
+.option-label:hover {
+    background: rgba(30, 64, 175, 0.3);
+    border-color: var(--primary);
+}
+
+.option-label.selected {
+    background: rgba(37, 99, 235, 0.2);
+    border-color: var(--primary);
+}
+
+.progress-bar {
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    margin-bottom: 2rem;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--accent);
+    transition: width 0.3s ease;
+}
+
+.result-card {
+    background: rgba(30, 41, 59, 0.7);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+.result-card.correct {
+    border-left: 4px solid var(--success);
+}
+
+.result-card.incorrect {
+    border-left: 4px solid var(--danger);
+}
+
+.score-display {
+    font-size: 3rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin: 1rem 0;
+}
+
+@keyframes slideUp {
+    from { 
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
     </style>
+    
     <script>
         function showContent(sectionId, element) {
             document.querySelectorAll('.content-section').forEach(section => {
@@ -35,6 +136,260 @@
                 link.classList.remove('active');
             });
             element.classList.add('active');
+        }
+    </script>
+    <script>
+        // Function to show content sections (likely already in your main page)
+        function showContent(sectionId, element) {
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+    
+            document.querySelectorAll('.sidebar a').forEach(link => {
+                link.classList.remove('active');
+            });
+            element.classList.add('active');
+            
+            // Initialize test if test section is shown
+            if (sectionId === 'test' && !testSubmitted) {
+                showTest();
+            }
+        }
+    
+        // Test questions and answers
+        const questions = [
+            {
+                question: "Which of these is NOT a primitive data type in Java?",
+                options: ["int", "String", "boolean", "double"],
+                answer: "String",
+                explanation: "String is a class in Java, not a primitive data type. The primitive types are byte, short, int, long, float, double, boolean, and char."
+            },
+            {
+                question: "What is the correct way to declare a variable in Java?",
+                options: ["variableName = 5;", "int variableName = 5;", "var variableName = 5;", "let variableName = 5;"],
+                answer: "int variableName = 5;",
+                explanation: "Java requires explicit type declaration for variables. The 'var' keyword was introduced in Java 10 for local variables only."
+            },
+            {
+                question: "Which keyword is used to create an object in Java?",
+                options: ["create", "new", "object", "make"],
+                answer: "new",
+                explanation: "The 'new' keyword is used to instantiate objects by calling the class constructor."
+            },
+            {
+                question: "What is the default value of an int variable in Java?",
+                options: ["0", "null", "1", "undefined"],
+                answer: "0",
+                explanation: "In Java, primitive numeric types default to 0 (or 0.0 for floating-point), booleans to false, and object references to null."
+            },
+            {
+                question: "Which of these is NOT a valid Java access modifier?",
+                options: ["public", "private", "protected", "internal"],
+                answer: "internal",
+                explanation: "Java has four access levels: public, protected, default (package-private), and private. 'internal' is a C# access modifier."
+            },
+            {
+                question: "What is the parent class of all classes in Java?",
+                options: ["Object", "Main", "Parent", "Super"],
+                answer: "Object",
+                explanation: "The Object class, in the java.lang package, sits at the top of the class hierarchy in Java."
+            },
+            {
+                question: "Which method must be implemented by all threads in Java?",
+                options: ["start()", "run()", "execute()", "begin()"],
+                answer: "run()",
+                explanation: "The run() method contains the code that executes when the thread is started. The start() method is used to begin thread execution."
+            },
+            {
+                question: "What does JVM stand for?",
+                options: ["Java Virtual Machine", "Java Variable Machine", "Java Verified Machine", "Java Visual Machine"],
+                answer: "Java Virtual Machine",
+                explanation: "The JVM is the engine that executes Java bytecode, providing platform independence through the 'write once, run anywhere' principle."
+            },
+            {
+                question: "Which collection class implements a dynamic array in Java?",
+                options: ["ArrayList", "HashMap", "LinkedList", "TreeSet"],
+                answer: "ArrayList",
+                explanation: "ArrayList provides a resizable array implementation, while LinkedList is a doubly-linked list implementation."
+            },
+            {
+                question: "Which keyword is used to handle exceptions in Java?",
+                options: ["try", "catch", "throw", "All of the above"],
+                answer: "All of the above",
+                explanation: "Java uses try-catch blocks for exception handling, and the throw keyword to explicitly throw exceptions."
+            }
+        ];
+    
+        let currentQuestion = 0;
+        let userAnswers = Array(questions.length).fill(null);
+        let testSubmitted = false;
+    
+        // Initialize the test
+        function showTest() {
+            document.getElementById('question-container').innerHTML = '';
+            document.getElementById('options-container').innerHTML = '';
+            document.getElementById('result-container').classList.add('hidden');
+            document.getElementById('test-container').classList.remove('hidden');
+            currentQuestion = 0;
+            userAnswers = Array(questions.length).fill(null);
+            testSubmitted = false;
+            updateProgress();
+            displayQuestion();
+        }
+    
+        // Display current question
+        function displayQuestion() {
+            const questionContainer = document.getElementById('question-container');
+            const optionsContainer = document.getElementById('options-container');
+            
+            questionContainer.innerHTML = `
+                <div class="text-sm text-primary font-medium mb-2">Question ${currentQuestion + 1}</div>
+                <h3 class="text-xl font-semibold">${questions[currentQuestion].question}</h3>
+            `;
+            
+            optionsContainer.innerHTML = '';
+            questions[currentQuestion].options.forEach((option, index) => {
+                const isChecked = userAnswers[currentQuestion] === option;
+                const optionId = `option-${currentQuestion}-${index}`;
+                
+                const optionElement = document.createElement('div');
+                optionElement.className = `option-label ${isChecked ? 'selected' : ''}`;
+                optionElement.innerHTML = `
+                    <input type="radio" id="${optionId}" name="answer" value="${option}" 
+                        ${isChecked ? 'checked' : ''} class="mr-3 hidden">
+                    <span class="flex items-center justify-center w-5 h-5 border rounded-full mr-3">
+                        ${isChecked ? '<span class="w-3 h-3 bg-primary rounded-full"></span>' : ''}
+                    </span>
+                    <span>${option}</span>
+                `;
+                
+                // Add event listener directly to the label
+                optionElement.addEventListener('click', () => {
+                    saveAnswer(option);
+                });
+                
+                optionsContainer.appendChild(optionElement);
+            });
+    
+            // Update navigation buttons and counter
+            updateNavigation();
+        }
+    
+        // Save user's answer
+        function saveAnswer(answer) {
+            userAnswers[currentQuestion] = answer;
+            
+            // Update UI to show selected option
+            const options = document.querySelectorAll('#options-container .option-label');
+            options.forEach((optionElement, index) => {
+                const isSelected = questions[currentQuestion].options[index] === answer;
+                optionElement.classList.toggle('selected', isSelected);
+                
+                // Update the radio button checked state
+                const radioInput = optionElement.querySelector('input[type="radio"]');
+                if (radioInput) {
+                    radioInput.checked = isSelected;
+                }
+                
+                // Update the custom radio indicator
+                const radioIndicator = optionElement.querySelector('span span');
+                if (radioIndicator) {
+                    radioIndicator.style.display = isSelected ? 'block' : 'none';
+                }
+            });
+        }
+    
+        // Update navigation
+        function updateNavigation() {
+            document.getElementById('prev-btn').disabled = currentQuestion === 0;
+            document.getElementById('next-btn').classList.toggle('hidden', currentQuestion === questions.length - 1);
+            document.getElementById('submit-btn').classList.toggle('hidden', currentQuestion !== questions.length - 1);
+            document.getElementById('question-counter').textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+        }
+    
+        // Navigate to next question
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                updateProgress();
+                displayQuestion();
+            }
+        }
+    
+        // Navigate to previous question
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                updateProgress();
+                displayQuestion();
+            }
+        }
+    
+        // Update progress bar
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progress-fill').style.width = `${progress}%`;
+        }
+    
+        // Submit the test
+        function submitTest() {
+            testSubmitted = true;
+            const testContainer = document.getElementById('test-container');
+            const resultContainer = document.getElementById('result-container');
+            
+            testContainer.classList.add('hidden');
+            resultContainer.classList.remove('hidden');
+            
+            // Calculate score
+            let score = 0;
+            questions.forEach((q, index) => {
+                if (userAnswers[index] === q.answer) {
+                    score++;
+                }
+            });
+            
+            const percentage = Math.round((score / questions.length) * 100);
+            
+            // Display results
+            document.getElementById('score-display').textContent = `${score}/${questions.length}`;
+            document.getElementById('correct-count').textContent = score;
+            document.getElementById('incorrect-count').textContent = questions.length - score;
+            document.getElementById('score-bar').style.width = `${percentage}%`;
+            
+            // Display detailed results
+            const detailedResults = document.getElementById('detailed-results');
+            detailedResults.innerHTML = '';
+            
+            questions.forEach((q, index) => {
+                const isCorrect = userAnswers[index] === q.answer;
+                const userAnswer = userAnswers[index] || 'Not answered';
+                
+                const card = document.createElement('div');
+                card.className = `result-card ${isCorrect ? 'correct' : 'incorrect'}`;
+                card.innerHTML = `
+                    <div class="flex justify-between items-start mb-2">
+                        <h4 class="font-medium">Question ${index + 1}: ${q.question}</h4>
+                        <span class="text-xs px-2 py-1 rounded-full ${isCorrect ? 'bg-success/10 text-success' : 'bg-danger/10 text-danger'}">
+                            ${isCorrect ? 'Correct' : 'Incorrect'}
+                        </span>
+                    </div>
+                    <div class="text-sm mb-2">
+                        <p class="text-gray-400">Your answer: <span class="${isCorrect ? 'text-success' : 'text-danger'}">${userAnswer}</span></p>
+                        ${!isCorrect ? `<p class="text-gray-400">Correct answer: <span class="text-success">${q.answer}</span></p>` : ''}
+                    </div>
+                    <div class="text-xs text-gray-500 bg-gray-800/50 p-2 rounded">
+                        <i class="fas fa-info-circle mr-1"></i> ${q.explanation}
+                    </div>
+                `;
+                
+                detailedResults.appendChild(card);
+            });
+        }
+    
+        // Retake the test
+        function retakeTest() {
+            showTest();
         }
     </script>
 </head>
@@ -62,6 +417,7 @@
         <a onclick="showContent('collections', this)">Collections Framework</a>
         <a onclick="showContent('streams', this)">Streams & Lambda</a>
         <a onclick="showContent('jdbc', this)">JDBC</a>
+        <a onclick="showContent('test', this)">Take Test</a>
     </div>
     
     <!-- Content Section -->
@@ -739,6 +1095,73 @@
 
     <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
     <p class="text-gray-300 mt-2">JDBC connects Java applications to databases for dynamic data handling.</p>
+</div>
+<div id="test" class="content-section active">
+    <div id="test-container">
+        <h1 class="text-3xl font-bold mb-2 text-center">
+            <span class="text-accent">Java</span> Knowledge Assessment
+        </h1>
+        <p class="text-gray-400 text-center mb-8">Test your Java knowledge with 10 questions</p>
+        
+        <div class="progress-bar">
+            <div id="progress-fill" class="progress-fill" style="width: 10%"></div>
+        </div>
+        
+        <div id="question-container" class="mb-8"></div>
+        <div id="options-container" class="grid grid-cols-1 gap-3 mb-8"></div>
+        
+        <div class="flex justify-between items-center">
+            <button id="prev-btn" onclick="prevQuestion()" class="flex items-center gap-2 bg-gray-700 hover:bg-gray-600 text-white font-medium py-2 px-4 rounded-lg transition">
+                <i class="fas fa-arrow-left"></i> Previous
+            </button>
+            
+            <div id="question-counter" class="text-sm text-gray-400">
+                Question 1 of 10
+            </div>
+            
+            <button id="next-btn" onclick="nextQuestion()" class="flex items-center gap-2 bg-primary hover:bg-secondary text-white font-medium py-2 px-4 rounded-lg transition">
+                Next <i class="fas fa-arrow-right"></i>
+            </button>
+            
+            <button id="submit-btn" onclick="submitTest()" class="hidden flex items-center gap-2 bg-accent hover:bg-yellow-700 text-white font-medium py-2 px-4 rounded-lg transition">
+                Submit Test <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+    
+    <div id="result-container" class="hidden">
+        <div class="text-center">
+            <h2 class="text-2xl font-bold mb-2">Assessment Complete!</h2>
+            <p class="text-gray-400 mb-6">Here are your results</p>
+            
+            <div class="score-display" id="score-display">0/10</div>
+            
+            <div class="flex justify-center gap-4 mb-8">
+                <div class="bg-success/10 text-success px-4 py-2 rounded-full">
+                    <span id="correct-count">0</span> Correct
+                </div>
+                <div class="bg-danger/10 text-danger px-4 py-2 rounded-full">
+                    <span id="incorrect-count">0</span> Incorrect
+                </div>
+            </div>
+            
+            <div class="w-full bg-gray-700 rounded-full h-2.5 mb-8">
+                <div id="score-bar" class="bg-gradient-to-r from-primary to-accent h-2.5 rounded-full" style="width: 0%"></div>
+            </div>
+        </div>
+        
+        <h3 class="text-xl font-semibold mb-4">Detailed Results</h3>
+        <div id="detailed-results" class="space-y-3"></div>
+        
+        <div class="mt-8 flex justify-center gap-4">
+            <button onclick="retakeTest()" class="flex items-center gap-2 bg-primary hover:bg-secondary text-white font-medium py-2 px-6 rounded-lg transition">
+                <i class="fas fa-sync-alt"></i> Retake Test
+            </button>
+            <button onclick="showContent('introduction', document.querySelector('.sidebar a'))" class="flex items-center gap-2 bg-gray-700 hover:bg-gray-600 text-white font-medium py-2 px-6 rounded-lg transition">
+                <i class="fas fa-home"></i> Return to Course
+            </button>
+        </div>
+    </div>
 </div>
 
     </div>   
