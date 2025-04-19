@@ -1,5 +1,5 @@
 <?php
-require_once 'config.php';
+require_once '../includes/config.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $full_name = trim($_POST['full_name']);
@@ -241,7 +241,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="login-container w-full max-w-md">
         <div class="dark-box">
             <div class="text-center mb-6">
-                <img src="logo.png" alt="DevAwakening Logo" class="w-20 mx-auto mb-3 hover:scale-110 transition-transform duration-300">
+                <img src="../assets/images/logo.png" alt="DevAwakening Logo" class="w-20 mx-auto mb-3 hover:scale-110 transition-transform duration-300">
                 <h1 class="text-2xl font-bold mb-1 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-orange-500">
                     Join DevAwakening
                 </h1>

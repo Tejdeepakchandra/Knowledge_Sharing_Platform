@@ -300,8 +300,8 @@ try {
             <?php echo SITE_NAME; ?>
         </h1>
         <ul class="hidden md:flex space-x-4 text-sm">
-            <li><a href="ex4.html" class="hover:text-yellow-400 transition">Home</a></li>
-            <li><a href="courses.html" class="hover:text-yellow-400 transition">Courses</a></li>
+            <li><a href="../index.html" class="hover:text-yellow-400 transition">Home</a></li>
+            <li><a href="courses/courses.html" class="hover:text-yellow-400 transition">Courses</a></li>
             <li><a href="logout.php" class="px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600 transition">Logout</a></li>
         </ul>
         <button class="md:hidden text-xl">

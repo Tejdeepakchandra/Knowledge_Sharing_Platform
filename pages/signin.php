@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'config.php';
+require_once '../includes/config.php';
 
 $error = ''; // Initialize error variable
 
@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($user && password_verify($password, $user['password'])) {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['full_name'] = $user['full_name'];
-            header("Location: ex4.html"); // Redirect to homepage or dashboard
+            header("Location: ../index.html"); // Redirect to homepage or dashboard
             exit();
         } else {
             $error = "Invalid email or password.";
@@ -166,7 +166,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="login-container w-full max-w-md">
         <div class="login-box p-8">
             <div class="text-center mb-8">
-                <img src="logo.png" alt="CodeBook Logo" class="w-24 mx-auto mb-4 hover:scale-110 transition-transform duration-300">
+                <img src="../assets/images/logo.png" alt="CodeBook Logo" class="w-24 mx-auto mb-4 hover:scale-110 transition-transform duration-300">
                 <h1 class="text-3xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-orange-500">
                     Welcome Back
                 </h1>
