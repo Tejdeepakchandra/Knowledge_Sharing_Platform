@@ -1,12 +1,10 @@
 # Use an official PHP image with Apache
 FROM php:8.1-apache
 
-# Install dependencies
+# Install dependencies for PostgreSQL
 RUN apt-get update && apt-get install -y \
-    libpng-dev \
-    libjpeg-dev \
-    libfreetype6-dev \
-    && docker-php-ext-install pdo_mysql \
+    libpq-dev \
+    && docker-php-ext-install pdo pdo_pgsql \
     && a2enmod rewrite
 
 # Copy the application code
