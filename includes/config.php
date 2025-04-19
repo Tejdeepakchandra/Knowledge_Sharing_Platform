@@ -1,13 +1,18 @@
 <?php
-$host = "localhost";
-$dbname = "devawakening";
-$username = "root"; 
-$password = ""; 
+$host = getenv('DB_HOST');
+$port = getenv('DB_PORT');
+$db   = getenv('DB_NAME');
+$user = getenv('DB_USER');
+$pass = getenv('DB_PASSWORD');
 
+$dsn = "pgsql:host=$host;port=$port;dbname=$db;";
 try {
-    $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $pdo = new PDO($dsn, $user, $pass, [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+    ]);
+    // echo "Connected to PostgreSQL!";
 } catch (PDOException $e) {
-    die("Connection failed: " . $e->getMessage());
+    echo "Database connection failed: " . $e->getMessage();
+    exit;
 }
 ?>
