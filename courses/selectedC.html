@@ -7,6 +7,15 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #1e40af;
+            --accent: #f59e0b;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --success: #10b981;
+            --danger: #ef4444;
+        }
         html { scroll-behavior: smooth; }
         body { font-family: Arial, sans-serif; background: #0f3460; color: white; }
         .sidebar {
@@ -25,6 +34,85 @@
         .code-block { background: #1e1e1e; padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; border-left: 5px solid #ffcc00; }
         .content-section { display: none; }
         .content-section.active { display: block; }
+        #test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(15, 23, 42, 0.7);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        #result-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            background: rgba(15, 23, 42, 0.7);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            animation: slideUp 0.4s ease;
+        }
+        .option-label {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background: rgba(30, 41, 59, 0.7);
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+        .option-label:hover {
+            background: rgba(30, 64, 175, 0.3);
+            border-color: var(--primary);
+        }
+        .option-label.selected {
+            background: rgba(37, 99, 235, 0.2);
+            border-color: var(--primary);
+        }
+        .progress-bar {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+        .result-card {
+            background: rgba(30, 41, 59, 0.7);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+        .result-card.correct {
+            border-left: 4px solid var(--success);
+        }
+        .result-card.incorrect {
+            border-left: 4px solid var(--danger);
+        }
+        .score-display {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: 1rem 0;
+        }
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
     <script>
         function showContent(sectionId, element) {
@@ -32,11 +120,202 @@
                 section.classList.remove('active');
             });
             document.getElementById(sectionId).classList.add('active');
-
             document.querySelectorAll('.sidebar a').forEach(link => {
                 link.classList.remove('active');
             });
             element.classList.add('active');
+            if (sectionId === 'test' && !testSubmitted) {
+                showTest();
+            }
+        }
+        const questions = [
+            {
+                question: "Which of these is NOT a valid data type in C?",
+                options: ["int", "float", "string", "double"],
+                answer: "string",
+                explanation: "C does not have a built-in 'string' data type. Strings are typically handled as arrays of characters (char[])."
+            },
+            {
+                question: "What is the correct way to declare a pointer in C?",
+                options: ["int ptr;", "int *ptr;", "pointer int ptr;", "*int ptr;"],
+                answer: "int *ptr;",
+                explanation: "In C, a pointer is declared using the asterisk (*) before the variable name, e.g., int *ptr;"
+            },
+            {
+                question: "Which operator is used to access structure members in C?",
+                options: [".", "->", "&", "*"],
+                answer: "->",
+                explanation: "The arrow operator (->) is used to access members of a structure through a pointer, while the dot (.) is used for direct access."
+            },
+            {
+                question: "What is the default value of an uninitialized local variable in C?",
+                options: ["0", "null", "undefined", "1"],
+                answer: "undefined",
+                explanation: "In C, uninitialized local variables contain garbage values (undefined behavior)."
+            },
+            {
+                question: "Which keyword is used to define a constant in C?",
+                options: ["const", "static", "final", "define"],
+                answer: "const",
+                explanation: "The 'const' keyword is used to define constants in C, while '#define' is a preprocessor directive for macros."
+            },
+            {
+                question: "What does the 'malloc' function do in C?",
+                options: ["Frees memory", "Allocates memory", "Resizes memory", "Clears memory"],
+                answer: "Allocates memory",
+                explanation: "'malloc' allocates a specified amount of memory dynamically and returns a pointer to it."
+            },
+            {
+                question: "Which header file is required for input/output operations in C?",
+                options: ["<stdio.h>", "<stdlib.h>", "<string.h>", "<math.h>"],
+                answer: "<stdio.h>",
+                explanation: "The <stdio.h> header file contains functions like printf and scanf for input/output operations."
+            },
+            {
+                question: "What is the purpose of the 'break' statement in C?",
+                options: ["Exits a loop", "Skips an iteration", "Defines a function", "Returns a value"],
+                answer: "Exits a loop",
+                explanation: "The 'break' statement terminates the nearest enclosing loop or switch statement."
+            },
+            {
+                question: "Which of these is a valid way to pass an array to a function in C?",
+                options: ["void func(int arr)", "void func(int *arr)", "void func(int arr[])", "All of the above"],
+                answer: "All of the above",
+                explanation: "In C, arrays can be passed as pointers, arrays, or pointer variables, as arrays decay to pointers when passed to functions."
+            },
+            {
+                question: "What does the 'sizeof' operator return in C?",
+                options: ["Length of a string", "Size of a variable in bytes", "Number of elements in an array", "Address of a variable"],
+                answer: "Size of a variable in bytes",
+                explanation: "The 'sizeof' operator returns the size of a variable or data type in bytes."
+            }
+        ];
+        let currentQuestion = 0;
+        let userAnswers = Array(questions.length).fill(null);
+        let testSubmitted = false;
+        function showTest() {
+            document.getElementById('question-container').innerHTML = '';
+            document.getElementById('options-container').innerHTML = '';
+            document.getElementById('result-container').classList.add('hidden');
+            document.getElementById('test-container').classList.remove('hidden');
+            currentQuestion = 0;
+            userAnswers = Array(questions.length).fill(null);
+            testSubmitted = false;
+            updateProgress();
+            displayQuestion();
+        }
+        function displayQuestion() {
+            const questionContainer = document.getElementById('question-container');
+            const optionsContainer = document.getElementById('options-container');
+            questionContainer.innerHTML = `
+                <div class="text-sm text-primary font-medium mb-2">Question ${currentQuestion + 1}</div>
+                <h3 class="text-xl font-semibold">${questions[currentQuestion].question}</h3>
+            `;
+            optionsContainer.innerHTML = '';
+            questions[currentQuestion].options.forEach((option, index) => {
+                const isChecked = userAnswers[currentQuestion] === option;
+                const optionId = `option-${currentQuestion}-${index}`;
+                const optionElement = document.createElement('div');
+                optionElement.className = `option-label ${isChecked ? 'selected' : ''}`;
+                optionElement.innerHTML = `
+                    <input type="radio" id="${optionId}" name="answer" value="${option}" 
+                        ${isChecked ? 'checked' : ''} class="mr-3 hidden">
+                    <span class="flex items-center justify-center w-5 h-5 border rounded-full mr-3">
+                        ${isChecked ? '<span class="w-3 h-3 bg-primary rounded-full"></span>' : ''}
+                    </span>
+                    <span>${option}</span>
+                `;
+                optionElement.addEventListener('click', () => {
+                    saveAnswer(option);
+                });
+                optionsContainer.appendChild(optionElement);
+            });
+            updateNavigation();
+        }
+        function saveAnswer(answer) {
+            userAnswers[currentQuestion] = answer;
+            const options = document.querySelectorAll('#options-container .option-label');
+            options.forEach((optionElement, index) => {
+                const isSelected = questions[currentQuestion].options[index] === answer;
+                optionElement.classList.toggle('selected', isSelected);
+                const radioInput = optionElement.querySelector('input[type="radio"]');
+                if (radioInput) {
+                    radioInput.checked = isSelected;
+                }
+                const radioIndicator = optionElement.querySelector('span span');
+                if (radioIndicator) {
+                    radioIndicator.style.display = isSelected ? 'block' : 'none';
+                }
+            });
+        }
+        function updateNavigation() {
+            document.getElementById('prev-btn').disabled = currentQuestion === 0;
+            document.getElementById('next-btn').classList.toggle('hidden', currentQuestion === questions.length - 1);
+            document.getElementById('submit-btn').classList.toggle('hidden', currentQuestion !== questions.length - 1);
+            document.getElementById('question-counter').textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+        }
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                updateProgress();
+                displayQuestion();
+            }
+        }
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                updateProgress();
+                displayQuestion();
+            }
+        }
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progress-fill').style.width = `${progress}%`;
+        }
+        function submitTest() {
+            testSubmitted = true;
+            const testContainer = document.getElementById('test-container');
+            const resultContainer = document.getElementById('result-container');
+            testContainer.classList.add('hidden');
+            resultContainer.classList.remove('hidden');
+            let score = 0;
+            questions.forEach((q, index) => {
+                if (userAnswers[index] === q.answer) {
+                    score++;
+                }
+            });
+            const percentage = Math.round((score / questions.length) * 100);
+            document.getElementById('score-display').textContent = `${score}/${questions.length}`;
+            document.getElementById('correct-count').textContent = score;
+            document.getElementById('incorrect-count').textContent = questions.length - score;
+            document.getElementById('score-bar').style.width = `${percentage}%`;
+            const detailedResults = document.getElementById('detailed-results');
+            detailedResults.innerHTML = '';
+            questions.forEach((q, index) => {
+                const isCorrect = userAnswers[index] === q.answer;
+                const userAnswer = userAnswers[index] || 'Not answered';
+                const card = document.createElement('div');
+                card.className = `result-card ${isCorrect ? 'correct' : 'incorrect'}`;
+                card.innerHTML = `
+                    <div class="flex justify-between items-start mb-2">
+                        <h4 class="font-medium">Question ${index + 1}: ${q.question}</h4>
+                        <span class="text-xs px-2 py-1 rounded-full ${isCorrect ? 'bg-success/10 text-success' : 'bg-danger/10 text-danger'}">
+                            ${isCorrect ? 'Correct' : 'Incorrect'}
+                        </span>
+                    </div>
+                    <div class="text-sm mb-2">
+                        <p class="text-gray-400">Your answer: <span class="${isCorrect ? 'text-success' : 'text-danger'}">${userAnswer}</span></p>
+                        ${!isCorrect ? `<p class="text-gray-400">Correct answer: <span class="text-success">${q.answer}</span></p>` : ''}
+                    </div>
+                    <div class="text-xs text-gray-500 bg-gray-800/50 p-2 rounded">
+                        <i class="fas fa-info-circle mr-1"></i> ${q.explanation}
+                    </div>
+                `;
+                detailedResults.appendChild(card);
+            });
+        }
+        function retakeTest() {
+            showTest();
         }
     </script>
 </head>
@@ -63,6 +342,7 @@
         <a onclick="showContent('recursion', this)">Recursion</a>
         <a onclick="showContent('linked-lists', this)">Linked Lists</a>
         <a onclick="showContent('bitwise', this)">Bitwise Operations</a>
+        <a onclick="showContent('test', this)">Take Test</a>
     </div>
     
     <!-- Content Section -->
@@ -1143,6 +1423,61 @@ int main() {
 
             <h2 class="text-2xl font-bold text-blue-400 underline mt-6">Conclusion</h2>
             <p class="text-gray-300 mt-2">Bitwise operations are essential for low-level programming and optimization in C.</p>
+        </div>
+        <div id="test" class="content-section">
+            <div id="test-container">
+                <h1 class="text-3xl font-bold mb-2 text-center">
+                    <span class="text-accent">C</span> Knowledge Assessment
+                </h1>
+                <p class="text-gray-400 text-center mb-8">Test your C knowledge with 10 questions</p>
+                <div class="progress-bar">
+                    <div id="progress-fill" class="progress-fill" style="width: 10%"></div>
+                </div>
+                <div id="question-container" class="mb-8"></div>
+                <div id="options-container" class="grid grid-cols-1 gap-3 mb-8"></div>
+                <div class="flex justify-between items-center">
+                    <button id="prev-btn" onclick="prevQuestion()" class="flex items-center gap-2 bg-gray-700 hover:bg-gray-600 text-white font-medium py-2 px-4 rounded-lg transition">
+                        <i class="fas fa-arrow-left"></i> Previous
+                    </button>
+                    <div id="question-counter" class="text-sm text-gray-400">
+                        Question 1 of 10
+                    </div>
+                    <button id="next-btn" onclick="nextQuestion()" class="flex items-center gap-2 bg-primary hover:bg-secondary text-white font-medium py-2 px-4 rounded-lg transition">
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <button id="submit-btn" onclick="submitTest()" class="hidden flex items-center gap-2 bg-accent hover:bg-yellow-700 text-white font-medium py-2 px-4 rounded-lg transition">
+                        Submit Test <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="result-container" class="hidden">
+                <div class="text-center">
+                    <h2 class="text-2xl font-bold mb-2">Assessment Complete!</h2>
+                    <p class="text-gray-400 mb-6">Here are your results</p>
+                    <div class="score-display" id="score-display">0/10</div>
+                    <div class="flex justify-center gap-4 mb-8">
+                        <div class="bg-success/10 text-success px-4 py-2 rounded-full">
+                            <span id="correct-count">0</span> Correct
+                        </div>
+                        <div class="bg-danger/10 text-danger px-4 py-2 rounded-full">
+                            <span id="incorrect-count">0</span> Incorrect
+                        </div>
+                    </div>
+                    <div class="w-full bg-gray-700 rounded-full h-2.5 mb-8">
+                        <div id="score-bar" class="bg-gradient-to-r from-primary to-accent h-2.5 rounded-full" style="width: 0%"></div>
+                    </div>
+                </div>
+                <h3 class="text-xl font-semibold mb-4">Detailed Results</h3>
+                <div id="detailed-results" class="space-y-3"></div>
+                <div class="mt-8 flex justify-center gap-4">
+                    <button onclick="retakeTest()" class="flex items-center gap-2 bg-primary hover:bg-secondary text-white font-medium py-2 px-6 rounded-lg transition">
+                        <i class="fas fa-sync-alt"></i> Retake Test
+                    </button>
+                    <button onclick="showContent('introduction', document.querySelector('.sidebar a'))" class="flex items-center gap-2 bg-gray-700 hover:bg-gray-600 text-white font-medium py-2 px-6 rounded-lg transition">
+                        <i class="fas fa-home"></i> Return to Course
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </body>
